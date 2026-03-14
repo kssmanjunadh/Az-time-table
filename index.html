@@ -1,0 +1,4517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Azure Data Engineer — 20-Week Timetable</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* ============================================================
+   Azure Data Engineer — 20-Week Timetable
+   Stylesheet: Azure-themed, professional, fully responsive
+   ============================================================ */
+
+/* ── Google Fonts ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── Design Tokens ────────────────────────────────────────── */
+:root {
+  /* Azure brand palette */
+  --azure-blue:        #0078d4;
+  --azure-blue-dark:   #005a9e;
+  --azure-blue-light:  #50e6ff;
+  --azure-teal:        #00b7c3;
+  --azure-indigo:      #4f52b2;
+  --azure-purple:      #8764b8;
+
+  /* Phase accent colors */
+  --phase-0:  #0078d4;   /* blue  */
+  --phase-1:  #00b7c3;   /* teal  */
+  --phase-2:  #107c10;   /* green */
+  --phase-3:  #ca5010;   /* orange*/
+  --phase-4:  #8764b8;   /* purple*/
+  --phase-5:  #e3008c;   /* pink  */
+
+  /* Neutrals */
+  --bg:           #f3f6fb;
+  --surface:      #ffffff;
+  --surface-alt:  #f8fafd;
+  --border:       #dde3ed;
+  --border-light: #eef1f7;
+
+  /* Text */
+  --text-primary:   #111827;
+  --text-secondary: #4b5563;
+  --text-muted:     #6b7280;
+  --text-on-dark:   #ffffff;
+
+  /* Table stripes */
+  --row-odd:  #ffffff;
+  --row-even: #f0f5fb;
+  --row-hover:#e3edf9;
+
+  /* Typography */
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  /* Spacing & Radius */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  16px;
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md:  0 4px 12px rgba(0,120,212,.12), 0 2px 6px rgba(0,0,0,.06);
+  --shadow-lg:  0 8px 28px rgba(0,120,212,.14), 0 4px 12px rgba(0,0,0,.08);
+}
+
+/* ── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 15px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.7;
+  padding: 2.5rem 1.5rem 5rem;
+}
+
+/* ── Page Wrapper ─────────────────────────────────────────── */
+body > * {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Top-level H1 (Page Title) ────────────────────────────── */
+h1:first-of-type {
+  background: linear-gradient(135deg, var(--azure-blue-dark) 0%, var(--azure-blue) 50%, var(--azure-teal) 100%);
+  color: var(--text-on-dark);
+  padding: 2.5rem 2.5rem 2rem;
+  border-radius: var(--radius-lg);
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+h1:first-of-type::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 240px; height: 240px;
+  background: rgba(255,255,255,.07);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ── Phase H1 Banners ─────────────────────────────────────── */
+h1:not(:first-of-type) {
+  padding: 1.1rem 1.8rem;
+  border-radius: var(--radius-md);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 3rem 0 1.25rem;
+  color: var(--text-on-dark);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Color each phase banner by its emoji/text prefix */
+h1:not(:first-of-type)[id*="phase-0"] { background: linear-gradient(135deg, #005a9e, var(--phase-0)); }
+h1:not(:first-of-type)[id*="phase-1"] { background: linear-gradient(135deg, #007b82, var(--phase-1)); }
+h1:not(:first-of-type)[id*="phase-2"] { background: linear-gradient(135deg, #085108, var(--phase-2)); }
+h1:not(:first-of-type)[id*="phase-3"] { background: linear-gradient(135deg, #8c3806, var(--phase-3)); }
+h1:not(:first-of-type)[id*="phase-4"] { background: linear-gradient(135deg, #5c3d82, var(--phase-4)); }
+h1:not(:first-of-type)[id*="phase-5"] { background: linear-gradient(135deg, #9b0063, var(--phase-5)); }
+
+/* Fallback for any phase H1 not matched above */
+h1:not(:first-of-type):not([id*="phase-0"]):not([id*="phase-1"]):not([id*="phase-2"]):not([id*="phase-3"]):not([id*="phase-4"]):not([id*="phase-5"]) {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+/* ── H2 (Section Headings / Week Headers) ─────────────────── */
+h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--azure-blue-dark);
+  padding: 0.6rem 1.2rem;
+  border-left: 4px solid var(--azure-blue);
+  background: linear-gradient(to right, rgba(0,120,212,.07), transparent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin: 2.5rem 0 1rem;
+  letter-spacing: -0.01em;
+}
+
+/* ── H3 (Sub-headings) ────────────────────────────────────── */
+h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 1.5rem 0 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.8rem;
+}
+
+/* ── General Paragraphs ───────────────────────────────────── */
+p {
+  color: var(--text-secondary);
+  margin-bottom: 0.9rem;
+  font-size: 0.92rem;
+}
+
+strong { color: var(--text-primary); font-weight: 600; }
+
+/* ── Horizontal Rules ─────────────────────────────────────── */
+hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, var(--azure-blue), var(--azure-teal), transparent);
+  border-radius: 2px;
+  margin: 2.5rem 0;
+  opacity: 0.4;
+}
+
+/* ── Unordered Lists ──────────────────────────────────────── */
+ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+ul li {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+  line-height: 1.6;
+}
+
+ul li::marker {
+  color: var(--azure-blue);
+}
+
+/* ── Task / Checklist (input[type=checkbox] lists) ────────── */
+ul.task-list {
+  list-style: none;
+  padding-left: 0.25rem;
+}
+
+ul.task-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+}
+
+ul.task-list li:hover {
+  background: var(--row-hover);
+}
+
+ul.task-list input[type="checkbox"] {
+  margin-top: 0.25rem;
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--azure-blue);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+/* ── Blockquotes ──────────────────────────────────────────── */
+blockquote {
+  background: linear-gradient(to right, rgba(0,120,212,.06), rgba(0,183,195,.04));
+  border-left: 4px solid var(--azure-teal);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1.1rem 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: var(--shadow-sm);
+}
+
+blockquote p {
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  font-style: italic;
+  margin: 0;
+}
+
+blockquote strong {
+  color: var(--azure-blue-dark);
+}
+
+/* ── Inline Code ──────────────────────────────────────────── */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  background: rgba(0,120,212,.1);
+  color: var(--azure-blue-dark);
+  padding: 0.15em 0.45em;
+  border-radius: 4px;
+  border: 1px solid rgba(0,120,212,.15);
+  white-space: nowrap;
+}
+
+/* ── Links ────────────────────────────────────────────────── */
+a {
+  color: var(--azure-blue);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(0,120,212,.3);
+  transition: color 0.15s, border-color 0.15s;
+}
+
+a:hover {
+  color: var(--azure-blue-dark);
+  border-bottom-color: var(--azure-blue-dark);
+}
+
+/* ── Table Wrapper (scroll on mobile) ────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.855rem;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2.25rem;
+  display: block;           /* enables horizontal scroll */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Force table to use full width when not overflowing */
+@media (min-width: 900px) {
+  table { display: table; }
+}
+
+/* ── Table Head ───────────────────────────────────────────── */
+thead {
+  background: linear-gradient(135deg, var(--azure-blue-dark) 0%, var(--azure-blue) 100%);
+}
+
+thead th {
+  color: var(--text-on-dark);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.85rem 0.9rem;
+  text-align: left;
+  white-space: nowrap;
+  border: none;
+}
+
+/* ── Table Body Rows ──────────────────────────────────────── */
+tbody tr.odd  { background: var(--row-odd); }
+tbody tr.even { background: var(--row-even); }
+
+tbody tr {
+  border-bottom: 1px solid var(--border-light);
+  transition: background 0.12s;
+}
+
+tbody tr:last-child { border-bottom: none; }
+
+tbody tr:hover {
+  background: var(--row-hover) !important;
+}
+
+/* ── Table Cells ──────────────────────────────────────────── */
+td {
+  padding: 0.75rem 0.9rem;
+  vertical-align: top;
+  color: var(--text-secondary);
+  font-size: 0.855rem;
+  line-height: 1.55;
+  border-right: 1px solid var(--border-light);
+}
+
+td:last-child { border-right: none; }
+
+/* Day column — bold + highlighted */
+td:first-child {
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  background: rgba(0,120,212,.04);
+}
+
+/* Total hours column */
+td:nth-child(5) {
+  text-align: center;
+  font-weight: 700;
+  color: var(--azure-blue);
+  white-space: nowrap;
+}
+
+/* Deliverable column */
+td:last-child {
+  font-style: normal;
+}
+
+/* Task checkmark cells (✅ column) */
+td:nth-child(6) {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* ── Overall Timeline Summary Table ──────────────────────── */
+/* First table on page gets special treatment */
+h2[id*="overall"] + table thead {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+/* ── Phase 5 Daily Structure Table (3-col) ───────────────── */
+table[style*="100%"] thead {
+  background: linear-gradient(135deg, #5c1063, var(--phase-5));
+}
+
+/* ── Links inside table cells ─────────────────────────────── */
+td a {
+  font-size: 0.82em;
+  white-space: nowrap;
+}
+
+/* ── Flexibility / Tips Paragraphs ───────────────────────── */
+h2[id*="flexibility"] + p,
+h2[id*="flexibility"] ~ p {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1.1rem;
+  margin-bottom: 0.6rem;
+  box-shadow: var(--shadow-sm);
+  font-size: 0.88rem;
+}
+
+/* ── Footer motivational italic ──────────────────────────── */
+p em {
+  display: block;
+  text-align: center;
+  color: var(--azure-blue-dark);
+  font-size: 0.95rem;
+  background: linear-gradient(to right, rgba(0,120,212,.05), rgba(0,183,195,.05));
+  border-radius: var(--radius-md);
+  padding: 1.2rem 1.5rem;
+  border: 1px solid rgba(0,120,212,.15);
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+/* ── Emoji in headings — no color shift ──────────────────── */
+h1, h2, h3 {
+  font-variant-emoji: text;
+}
+
+/* ── Scrollbar Styling ────────────────────────────────────── */
+::-webkit-scrollbar { width: 7px; height: 7px; }
+::-webkit-scrollbar-track { background: var(--border-light); border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: var(--azure-blue); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--azure-blue-dark); }
+
+/* ── Meta Info Bar (with inline date picker) ──────────────── */
+p#meta-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.meta-key {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--azure-blue);
+}
+
+.meta-val {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+/* Inline date input — sits naturally inside the meta value */
+#start-date-input {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--azure-blue-dark);
+  background: rgba(0, 120, 212, 0.06);
+  border: 1.5px solid rgba(0, 120, 212, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.55rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+#start-date-input:hover {
+  background: rgba(0, 120, 212, 0.1);
+  border-color: var(--azure-blue);
+}
+
+#start-date-input:focus {
+  border-color: var(--azure-blue);
+  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.15);
+}
+
+span.auto-date { display: inline; }
+
+@media (max-width: 600px) {
+  p#meta-bar { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 420px) {
+  p#meta-bar { grid-template-columns: 1fr; }
+}
+
+/* ── Done / Completion Checkbox Column ───────────────────── */
+th.col-done,
+td.col-done {
+  text-align: center;
+  white-space: nowrap;
+  width: 52px;
+  min-width: 52px;
+}
+
+th.col-done {
+  background: rgba(0, 0, 0, 0.18);   /* slightly darker within the blue header */
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+td.col-done {
+  background: transparent;
+  vertical-align: middle;
+  padding: 0;
+}
+
+/* The clickable label fills the whole cell for easy tapping */
+label.done-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 2.8rem;
+  cursor: pointer;
+  padding: 0.4rem;
+}
+
+/* The checkbox itself */
+input.day-done {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  flex-shrink: 0;
+}
+
+input.day-done:hover {
+  border-color: var(--azure-blue);
+  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.15);
+}
+
+input.day-done:checked {
+  background: var(--azure-blue);
+  border-color: var(--azure-blue);
+}
+
+/* Checkmark via pseudo-element */
+input.day-done:checked::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 4px;
+  width: 6px;
+  height: 10px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+/* Strike-through the whole row when checked — JS toggled class */
+tr.day-complete td {
+  opacity: 0.5;
+  text-decoration: line-through;
+  text-decoration-color: rgba(0, 120, 212, 0.4);
+}
+
+tr.day-complete td.col-done {
+  text-decoration: none;
+  opacity: 1;
+}
+
+/* ── Grand Total Timer Panel ──────────────────────────────── */
+#timer-grand-total {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, #052a17 0%, #0e5c31 100%);
+  border-radius: var(--radius-md);
+  padding: 0.8rem 1.4rem;
+  margin-bottom: 1.75rem;
+  box-shadow: var(--shadow-md);
+  color: #ffffff;
+}
+
+.gt-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.gt-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #88f0b0;
+  flex: 1;
+}
+
+.gt-value {
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  background: rgba(0,0,0,.25);
+  padding: 0.2rem 0.75rem;
+  border-radius: var(--radius-sm);
+  min-width: 6rem;
+  text-align: center;
+}
+
+/* ── Timer Column Header & Cell ───────────────────────────── */
+th.col-timer {
+  text-align: center;
+  white-space: nowrap;
+  width: 110px;
+  min-width: 110px;
+  background: rgba(0,0,0,.2);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+td.col-timer {
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.4rem 0.5rem;
+  width: 110px;
+  min-width: 110px;
+}
+
+/* ── Timer Widget ─────────────────────────────────────────── */
+.timer-widget {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+/* Display: HH:MM:SS */
+.timer-display {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.15rem 0.4rem;
+  min-width: 3.6rem;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+/* Shared button base */
+.timer-btn {
+  font-size: 0.72rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0.22rem 0.45rem;
+  line-height: 1;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  flex-shrink: 0;
+}
+
+.timer-btn:hover  { transform: scale(1.12); }
+.timer-btn:active { transform: scale(0.95); }
+
+/* Play button — blue idle state */
+.timer-play {
+  background: rgba(0, 120, 212, 0.12);
+  color: var(--azure-blue);
+  border: 1px solid rgba(0, 120, 212, 0.3);
+}
+
+.timer-play:hover {
+  background: rgba(0, 120, 212, 0.22);
+  box-shadow: 0 0 0 2px rgba(0,120,212,.2);
+}
+
+/* Play button — green running state */
+.timer-play.running {
+  background: rgba(16, 124, 16, 0.15);
+  color: #107c10;
+  border-color: rgba(16, 124, 16, 0.4);
+  animation: pulse-ring 1.6s infinite;
+}
+
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0   rgba(16,124,16,.35); }
+  60%  { box-shadow: 0 0 0 5px rgba(16,124,16,0);   }
+  100% { box-shadow: 0 0 0 0   rgba(16,124,16,0);   }
+}
+
+/* Reset button — neutral */
+.timer-reset {
+  background: rgba(107, 114, 128, 0.1);
+  color: var(--text-muted);
+  border: 1px solid rgba(107, 114, 128, 0.25);
+  font-size: 0.85rem;
+}
+
+.timer-reset:hover {
+  background: rgba(202, 80, 16, 0.12);
+  color: #ca5010;
+  border-color: rgba(202,80,16,.3);
+}
+
+/* ── Running row highlight ────────────────────────────────── */
+tr.timer-running {
+  background: rgba(16, 124, 16, 0.06) !important;
+}
+
+tr.timer-running td:first-child {
+  background: rgba(16, 124, 16, 0.08);
+  color: #085108;
+}
+
+tr.timer-running .timer-display {
+  color: #107c10;
+  border-color: rgba(16,124,16,.4);
+  background: rgba(16,124,16,.06);
+}
+
+/* ── Weekly Total Footer ──────────────────────────────────── */
+tfoot.timer-tfoot tr {
+  background: linear-gradient(to right, rgba(0,120,212,.07), rgba(0,183,195,.05));
+  border-top: 2px solid var(--border);
+}
+
+.timer-total-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--azure-blue-dark);
+  letter-spacing: 0.03em;
+  padding: 0.55rem 0.9rem;
+  text-align: right;
+}
+
+.timer-total-value {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--azure-blue);
+  text-align: center;
+  padding: 0.55rem 0.5rem;
+  background: rgba(0,120,212,.06);
+  white-space: nowrap;
+}
+
+/* ── Print Styles ─────────────────────────────────────────── */
+@media print {
+  body { background: white; padding: 0; }
+
+  h1:first-of-type,
+  h1:not(:first-of-type) { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  table { box-shadow: none; border: 1px solid #ccc; font-size: 0.75rem; }
+
+  thead { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  a { color: var(--azure-blue); border: none; }
+
+  hr { opacity: 0.2; }
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  body { padding: 1.25rem 0.9rem 4rem; }
+
+  h1:first-of-type { font-size: 1.3rem; padding: 1.5rem 1.25rem; }
+
+  h1:not(:first-of-type) { font-size: 1.1rem; padding: 0.8rem 1.1rem; margin: 2rem 0 0.9rem; }
+
+  h2 { font-size: 0.95rem; padding: 0.5rem 1rem; margin: 1.75rem 0 0.75rem; }
+
+  table { font-size: 0.78rem; margin-bottom: 1.5rem; }
+
+  thead th { padding: 0.65rem 0.7rem; font-size: 0.7rem; }
+
+  td { padding: 0.6rem 0.7rem; }
+}
+
+@media (max-width: 480px) {
+  body { padding: 1rem 0.6rem 3rem; }
+  h1:first-of-type { font-size: 1.1rem; padding: 1.1rem 1rem; }
+  code { white-space: normal; }
+}
+
+</style>
+</head>
+<body>
+
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Azure Data Engineer — 20-Week Timetable</title>
+
+</head>
+<h1 id="azure-data-engineer-20-week-day-by-day-timetable">🗓️ Azure Data
+Engineer — 20-Week Day-by-Day Timetable</h1>
+<p id="meta-bar">
+<span class="meta-item">
+<span class="meta-key">📅 Start Date</span>
+<span class="meta-val">
+      Monday,
+      <input id="start-date-input" title="Click to change start date — all dates update automatically" type="date" value="2026-03-16"/>
+</span>
+</span>
+<span class="meta-item">
+<span class="meta-key">🎯 Target Cert</span>
+<span class="meta-val">DP-203 by ~<span class="auto-date" data-fmt="MMMM D, YYYY" data-offset="127">July 21, 2026</span></span>
+</span>
+<span class="meta-item">
+<span class="meta-key">⏱ Daily Commitment</span>
+<span class="meta-val">6–7 hours | 3 focused time blocks</span>
+</span>
+<span class="meta-item">
+<span class="meta-key">💰 Assumed Budget</span>
+<span class="meta-val">~$50–$100 for optional Udemy courses (free alternatives noted throughout)</span>
+</span>
+</p>
+<hr/>
+<h2 id="overall-timeline-summary">📊 Overall Timeline Summary</h2>
+<table>
+<colgroup>
+<col style="width: 10%"/>
+<col style="width: 10%"/>
+<col style="width: 17%"/>
+<col style="width: 14%"/>
+<col style="width: 25%"/>
+<col style="width: 22%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Phase</th>
+<th>Weeks</th>
+<th>Start Date</th>
+<th>End Date</th>
+<th>Total Est. Hours</th>
+<th>Key Milestone</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Phase 0:</strong> Prerequisites</td>
+<td>1–2</td>
+<td><span class="auto-date" data-fmt="MMM D" data-offset="0">Mar 16</span></td>
+<td><span class="auto-date" data-fmt="MMM D" data-offset="13">Mar 29</span></td>
+<td>~84 hrs</td>
+<td>Python &amp; SQL solid; Azure account live; Local ETL script
+done</td>
+</tr>
+<tr class="even">
+<td><strong>Phase 1:</strong> Azure Data Fundamentals</td>
+<td>3–5</td>
+<td><span class="auto-date" data-fmt="MMM D" data-offset="14">Mar 30</span></td>
+<td><span class="auto-date" data-fmt="MMM D" data-offset="34">Apr 19</span></td>
+<td>~105 hrs</td>
+<td>DP-900 Certified ✅</td>
+</tr>
+<tr class="odd">
+<td><strong>Phase 2:</strong> Core Data Engineering</td>
+<td>6–13</td>
+<td><span class="auto-date" data-fmt="MMM D" data-offset="35">Apr 20</span></td>
+<td><span class="auto-date" data-fmt="MMM D" data-offset="90">Jun 14</span></td>
+<td>~336 hrs</td>
+<td>End-to-end pipeline project done ✅; DP-203 knowledge built</td>
+</tr>
+<tr class="even">
+<td><strong>Phase 3:</strong> Advanced &amp; Production</td>
+<td>14–16</td>
+<td><span class="auto-date" data-fmt="MMM D" data-offset="91">Jun 15</span></td>
+<td><span class="auto-date" data-fmt="MMM D" data-offset="111">Jul 5</span></td>
+<td>~126 hrs</td>
+<td>IoT capstone project done ✅; CI/CD live</td>
+</tr>
+<tr class="odd">
+<td><strong>Phase 4:</strong> Cert &amp; Portfolio Polish</td>
+<td>17–19</td>
+<td><span class="auto-date" data-fmt="MMM D" data-offset="112">Jul 6</span></td>
+<td><span class="auto-date" data-fmt="MMM D" data-offset="132">Jul 26</span></td>
+<td>~126 hrs</td>
+<td>DP-203 Certified ✅; Portfolio live; First 15 applications sent</td>
+</tr>
+<tr class="even">
+<td><strong>Phase 5:</strong> Job Hunt</td>
+<td>20+</td>
+<td><span class="auto-date" data-fmt="MMM D" data-offset="133">Jul 27</span></td>
+<td>Ongoing</td>
+<td>Ongoing</td>
+<td>Job offer landed 🎉</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total study hours over 19 weeks:</strong> ~777 hrs ≈ 41
+hrs/week ≈ 5.9 hrs/day ✓</p>
+<hr/>
+<h1 id="phase-0-prerequisites-weeks-12">🟦 PHASE 0: Prerequisites (Weeks
+1–2)</h1>
+<p><strong>Dates:</strong> <span class="auto-date" data-fmt="MMMM D" data-offset="0">March 16</span> – <span class="auto-date" data-fmt="MMMM D" data-offset="13">March 29</span>, 2026</p>
+<p><strong>Phase 0 Goals:</strong> - Build solid Python skills (focus:
+pandas, scripting, data manipulation) - Solidify SQL through window
+functions and CTEs - Learn Azure core concepts for AZ-900 - Set up your
+full development environment - Deliver: Local ETL script (CSV → pandas
+clean → SQLite load)</p>
+<hr/>
+<h2 id="week-1-phase-0-march-1622-ultra-detailed">📅 WEEK 1 | Phase 0 |
+<span class="auto-date" data-fmt="MMMM D" data-offset="0">March 16</span>–<span class="auto-date" data-fmt="D" data-offset="6">22</span> ⭐ ULTRA-DETAILED</h2>
+<h3 id="weekly-focus">Weekly Focus</h3>
+<ul>
+<li>Get your environment 100% configured and running</li>
+<li>Complete Python fundamentals: data types, loops, functions, lists,
+dicts, file I/O</li>
+<li>Complete SQL basics through intermediate: SELECT → JOINs → GROUP BY
+→ window functions</li>
+<li>Begin Azure fundamentals (AZ-900 modules 1–2)</li>
+<li>End-of-week deliverable: Python script that reads a CSV and loads
+data into SQLite</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="0">Mon Mar 16</span></strong></td>
+<td><strong>Environment Setup</strong> Install Python 3.11+, VS Code,
+Git, Azure CLI. Create Azure free account. Install VS Code extensions:
+Python, Pylance, Jupyter</td>
+<td><strong>Python Basics</strong> MS Learn “Intro to Python” —
+variables, data types, strings, numbers, booleans. Run 5 small exercises
+in VS Code</td>
+<td><strong>SQL Basics</strong> SQLBolt Lessons 1–6: SELECT, WHERE,
+ORDER BY, LIMIT. Complete all interactive exercises</td>
+<td>6.5h</td>
+<td>✅ Python installed ✅ Azure account live ✅ VS Code configured ✅
+SQLBolt L1–6 done</td>
+<td><a href="https://learn.microsoft.com/en-us/training/paths/beginner-python/" rel="noopener noreferrer" target="_blank">MS
+Learn Python</a> · <a href="https://sqlbolt.com/" rel="noopener noreferrer" target="_blank">SQLBolt</a> · <a href="https://azure.microsoft.com/free/" rel="noopener noreferrer" target="_blank">Azure Free</a></td>
+<td><strong>Checkpoint:</strong> “Hello World” running in VS Code +
+Azure portal login confirmed (screenshot)</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="1">Tue Mar 17</span></strong></td>
+<td><strong>Python: Control Flow</strong> MS Learn — if/else, for loops,
+while loops. Write: FizzBuzz, a number guessing game, a list sorter</td>
+<td><strong>Python: Functions &amp; Modules</strong> Define functions,
+default args, *args, **kwargs. Create a <code>utils.py</code> with 3
+reusable functions. Import and call them from a second file</td>
+<td><strong>SQL: JOINs</strong> SQLBolt Lessons 7–12: INNER JOIN, LEFT
+JOIN, NULL handling. Complete all exercises</td>
+<td>6.5h</td>
+<td>✅ Python functions working ✅ SQLBolt L7–12 done</td>
+<td><a href="https://learn.microsoft.com/en-us/training/paths/beginner-python/" rel="noopener noreferrer" target="_blank">MS
+Learn Python</a> · <a href="https://sqlbolt.com/" rel="noopener noreferrer" target="_blank">SQLBolt</a></td>
+<td><strong>Deliverable:</strong> <code>utils.py</code> with 3 functions
+committed to a new GitHub repo</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="2">Wed Mar 18</span></strong></td>
+<td><strong>Python: Lists, Dicts, Comprehensions</strong> List
+operations, dictionary manipulation, list/dict comprehensions.
+HackerRank: 5 easy Python challenges</td>
+<td><strong>Python: File I/O + CSV</strong> Read/write CSV files with
+built-in <code>csv</code> module. Read a sample sales CSV, filter rows,
+write a cleaned output CSV</td>
+<td><strong>SQL: Aggregations</strong> SQLBolt Lessons 13–18: GROUP BY,
+HAVING, COUNT/SUM/AVG/MAX/MIN. Complete all exercises</td>
+<td>6.5h</td>
+<td>✅ CSV reader/writer script done ✅ SQLBolt L13–18 done</td>
+<td><a href="https://www.hackerrank.com/domains/python" rel="noopener noreferrer" target="_blank">HackerRank
+Python</a> · <a href="https://sqlbolt.com/" rel="noopener noreferrer" target="_blank">SQLBolt</a></td>
+<td><strong>Deliverable:</strong> Python script that reads sales CSV and
+prints top 5 products by revenue</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="3">Thu Mar 19</span></strong></td>
+<td><strong>Python: pandas Introduction</strong> Install pandas. Load a
+CSV into a DataFrame. Explore <code>.head()</code>,
+<code>.info()</code>, <code>.describe()</code>,
+<code>.value_counts()</code>. Filter rows, select columns</td>
+<td><strong>pandas: Data Cleaning</strong> Handle missing values
+(<code>.fillna()</code>, <code>.dropna()</code>), rename columns, change
+dtypes, remove duplicates. Use a messy dataset from Kaggle</td>
+<td><strong>SQL: Subqueries &amp; CTEs</strong> Mode Analytics SQL
+Tutorial — subqueries, CTEs (WITH clause). Write 3 queries using CTEs on
+sample data</td>
+<td>7h</td>
+<td>✅ pandas basics complete ✅ Cleaned a messy dataset ✅ CTE practice
+done</td>
+<td><a href="https://pandas.pydata.org/docs/getting_started/" rel="noopener noreferrer" target="_blank">pandas
+docs</a> · <a href="https://mode.com/sql-tutorial/" rel="noopener noreferrer" target="_blank">Mode SQL</a></td>
+<td><strong>Deliverable:</strong> Jupyter notebook showing raw vs
+cleaned DataFrame with inline comments</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="4">Fri Mar 20</span></strong></td>
+<td><strong>pandas: GroupBy &amp; Aggregations</strong>
+<code>.groupby()</code>, <code>.agg()</code>,
+<code>.pivot_table()</code>. Calculate monthly sales by region from your
+CSV data</td>
+<td><strong>Python: SQLite + sqlite3 Module</strong> Connect to SQLite
+DB, create a table, insert data from a DataFrame, run SELECT queries
+back</td>
+<td><strong>SQL: Window Functions</strong> Mode Analytics — ROW_NUMBER,
+RANK, DENSE_RANK, LAG, LEAD, running totals. Write 5 window function
+queries</td>
+<td>6.5h</td>
+<td>✅ GroupBy notebook ✅ SQLite connection working ✅ 5 window
+function queries</td>
+<td><a href="https://docs.python.org/3/library/sqlite3.html" rel="noopener noreferrer" target="_blank">sqlite3
+docs</a> · <a href="https://mode.com/sql-tutorial/sql-window-functions/" rel="noopener noreferrer" target="_blank">Mode SQL
+Windows</a></td>
+<td><strong>Deliverable:</strong> Python script that inserts 100 rows
+into SQLite and runs a GROUP BY query</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="5">Sat Mar 21</span></strong></td>
+<td><strong>Azure AZ-900: Module 1</strong> MS Learn “Describe cloud
+concepts” — cloud models (public/private/hybrid), benefits of cloud,
+shared responsibility model</td>
+<td><strong>Azure AZ-900: Module 2</strong> MS Learn “Describe Azure
+architecture and services” — regions, availability zones, resource
+groups, subscriptions</td>
+<td><strong>Azure Portal Practice</strong> Log into Azure portal. Create
+a Resource Group. Explore portal navigation, Cost Management section,
+and Azure Advisor</td>
+<td>6.5h</td>
+<td>✅ AZ-900 modules 1–2 done ✅ Resource Group created</td>
+<td><a href="https://learn.microsoft.com/en-us/certifications/azure-fundamentals/" rel="noopener noreferrer" target="_blank">MS
+Learn AZ-900</a></td>
+<td><strong>Checkpoint:</strong> Resource Group visible in Azure portal
+(screenshot)</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="6">Sun Mar 22</span></strong></td>
+<td><strong>Review &amp; Reinforce</strong> Redo 3 HackerRank Python
+challenges. Re-read pandas cheat sheet. Review your SQLBolt
+mistakes</td>
+<td><strong>Phase 0 Mini-Project: Part 1</strong> Start the local ETL
+script: Load <code>sales_data.csv</code> with pandas, clean nulls, add
+calculated column (e.g., <code>revenue = price × quantity</code>)</td>
+<td><strong>Week 1 Wrap-up</strong> Push all code to GitHub. Write a
+short README for your repo. Plan Week 2 tasks</td>
+<td>6h</td>
+<td>✅ Code pushed to GitHub ✅ ETL script started ✅ README
+written</td>
+<td><a href="https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf" rel="noopener noreferrer" target="_blank">pandas
+Cheat Sheet</a></td>
+<td><strong>Deliverable:</strong> GitHub repo with Week 1 code + README
+live and public</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="week-2-phase-0-march-2329">📅 WEEK 2 | Phase 0 | March
+23–29</h2>
+<h3 id="weekly-focus-1">Weekly Focus</h3>
+<ul>
+<li>Complete the Phase 0 mini-project end-to-end (CSV → pandas → SQLite
+ETL)</li>
+<li>Finish all AZ-900 modules and take a practice test (target
+85%+)</li>
+<li>Deepen pandas (merge, reshape) and SQL (advanced practice)</li>
+<li>Connect Python to Azure: read from Blob Storage, connect to Azure
+SQL DB</li>
+<li>Sunday is a buffer/catch-up day</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="7">Mon Mar 23</span></strong></td>
+<td><strong>pandas: Merge &amp; Join</strong> <code>.merge()</code>,
+<code>.concat()</code>, <code>.join()</code>. Combine orders + customers
+DataFrames. Understand inner/left/right/outer merges</td>
+<td><strong>pandas: Reshaping</strong> <code>.melt()</code>,
+<code>.pivot()</code>, <code>.stack()</code>, <code>.unstack()</code>.
+Convert wide→long format (common in data engineering pipelines)</td>
+<td><strong>SQL: Advanced Practice</strong> Mode Analytics advanced SQL
+— write 5 complex queries combining JOINs + window functions + CTEs</td>
+<td>6.5h</td>
+<td>✅ Merge/join notebook done ✅ Reshaping exercises done ✅ 5 complex
+SQL queries</td>
+<td><a href="https://mode.com/sql-tutorial/" rel="noopener noreferrer" target="_blank">Mode SQL Advanced</a></td>
+<td><strong>Deliverable:</strong> Notebook showing 3 DataFrame merge
+scenarios with annotated output</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="8">Tue Mar 24</span></strong></td>
+<td><strong>Python: Error Handling &amp; Logging</strong> try/except,
+raise, custom exceptions. Add Python <code>logging</code> module to your
+ETL script (INFO and ERROR levels)</td>
+<td><strong>Phase 0 Mini-Project: Part 2</strong> Complete ETL script:
+CSV → pandas clean → SQLite load. Add logging. Handle errors (missing
+file, bad rows, type mismatches)</td>
+<td><strong>Azure: AZ-900 Module 3</strong> MS Learn “Describe Azure
+management and governance” — cost management, governance tools,
+compliance, monitoring</td>
+<td>7h</td>
+<td>✅ ETL script with error handling ✅ AZ-900 Module 3 done</td>
+<td><a href="https://docs.python.org/3/library/logging.html" rel="noopener noreferrer" target="_blank">Python
+logging</a></td>
+<td><strong>Deliverable:</strong> ETL script with logging + error
+handling running cleanly</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="9">Wed Mar 25</span></strong></td>
+<td><strong>Python: Virtual Environments &amp; pip</strong> Create venv,
+manage <code>requirements.txt</code>, understand package management.
+Good habit for every project from now on</td>
+<td><strong>Phase 0 Mini-Project: COMPLETE</strong> Final polish: Add
+<code>argparse</code> so the script takes CSV path as a CLI argument.
+Run on 2 different CSV files. Validate output rows match</td>
+<td><strong>AZ-900: Module 4</strong> MS Learn — Azure compute (VMs, App
+Service, AKS), networking (VNet, VPN, ExpressRoute), storage basics</td>
+<td>6.5h</td>
+<td>✅ Mini-project COMPLETE ✅ AZ-900 M4 done ✅ requirements.txt
+created</td>
+<td><a href="https://docs.python.org/3/library/venv.html" rel="noopener noreferrer" target="_blank">Python
+venv</a></td>
+<td><strong>Deliverable:</strong> Fully working ETL script pushed to
+GitHub with README explaining how to run it</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="10">Thu Mar 26</span></strong></td>
+<td><strong>AZ-900: Modules 5–6</strong> MS Learn — Azure databases,
+Azure Marketplace, Azure IoT &amp; AI basics, Azure DevOps overview</td>
+<td><strong>AZ-900: Practice Test</strong> Take the free Microsoft Learn
+AZ-900 practice assessment. Record every wrong answer carefully</td>
+<td><strong>AZ-900: Weak Area Review</strong> Go back to specific MS
+Learn modules for every wrong answer. Make flashcards in Anki or
+Notion</td>
+<td>7h</td>
+<td>✅ AZ-900 all modules done ✅ Practice test taken ✅ Flashcards
+created</td>
+<td><a href="https://learn.microsoft.com/en-us/certifications/azure-fundamentals/" rel="noopener noreferrer" target="_blank">MS
+Learn AZ-900 Practice</a></td>
+<td><strong>Checkpoint:</strong> Practice test score ≥85% — note your
+exact score</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="11">Fri Mar 27</span></strong></td>
+<td><strong>Python: Connecting to Azure SQL DB</strong> Install
+<code>pyodbc</code> or <code>sqlalchemy</code>. Write a Python script to
+connect to your Azure SQL DB (provision a Basic tier DB on your free
+account)</td>
+<td><strong>Azure Lab: Blob Storage</strong> Create a Blob Storage
+container in the Azure portal. Upload a CSV file. Access and browse it
+via Azure Storage Explorer</td>
+<td><strong>Python: Read from Azure Blob</strong> Use
+<code>azure-storage-blob</code> Python SDK to download your CSV from
+Blob and load it into a pandas DataFrame</td>
+<td>7h</td>
+<td>✅ Azure SQL DB provisioned ✅ Blob container created ✅ Python
+reads CSV from Blob</td>
+<td><a href="https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-python" rel="noopener noreferrer" target="_blank">azure-storage-blob
+SDK</a></td>
+<td><strong>Deliverable:</strong> Python script that reads a CSV from
+Azure Blob and prints top 5 rows in terminal</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="12">Sat Mar 28</span></strong></td>
+<td><strong>SQL: Index &amp; Performance Basics</strong> Read about
+index types, query plans (EXPLAIN). Practice on Azure SQL DB — add a
+clustered index and compare query times with/without</td>
+<td><strong>AZ-900: Final Review</strong> Watch John Savill’s
+DP-900/AZ-900 exam cram video. Re-read all flashcards
+cover-to-cover</td>
+<td><strong>Python Review &amp; HackerRank</strong> 5 more HackerRank
+Python medium challenges. Focus on string manipulation and data
+structures</td>
+<td>6.5h</td>
+<td>✅ Index concepts understood ✅ AZ-900 fully reviewed</td>
+<td><a href="https://www.youtube.com/watch?v=U9I9rMl3Mf4" rel="noopener noreferrer" target="_blank">John Savill
+YouTube</a></td>
+<td><strong>Checkpoint:</strong> HackerRank Python: 5-star badge
+earned</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="13">Sun Mar 29</span></strong></td>
+<td><strong>Phase 0 Buffer / Catch-up Day</strong> Use this to finish
+anything incomplete from this week — or get ahead by reading Phase 1
+materials</td>
+<td><strong>Portfolio Prep</strong> Organize your GitHub repo. Add a
+simple architecture diagram (draw.io) showing your ETL pipeline flow.
+Export as PNG</td>
+<td><strong>Phase 0 Wrap-up</strong> Review your deliverables checklist.
+Draft a short LinkedIn post: “Week 2 done — built my first ETL pipeline
+with Python and Azure!”</td>
+<td>6h</td>
+<td>✅ All Phase 0 items complete ✅ GitHub clean and organized ✅
+LinkedIn post drafted</td>
+<td><a href="https://app.diagrams.net/" rel="noopener noreferrer" target="_blank">draw.io</a></td>
+<td><strong>🎉 Phase 0 COMPLETE — Local ETL pipeline built and
+documented!</strong></td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<blockquote>
+<p>🎉 <strong>Phase 0 Milestone:</strong> You’ve built your first real
+data pipeline, sharpened Python and SQL, and your Azure account is live
+and connected to Python. That is a genuine data engineer foundation.
+Take a short break, post on LinkedIn, and get ready for your first Azure
+certification!</p>
+</blockquote>
+<hr/>
+<h1 id="phase-1-azure-data-fundamentals-weeks-35">🟨 PHASE 1: Azure Data
+Fundamentals (Weeks 3–5)</h1>
+<p><strong>Dates:</strong> <span class="auto-date" data-fmt="MMMM D" data-offset="14">March 30</span> – <span class="auto-date" data-fmt="MMMM D" data-offset="34">April 19</span>, 2026</p>
+<p><strong>Phase 1 Goals:</strong> - Master core Azure data services
+theory end-to-end - Hands-on with Blob, Azure SQL DB, ADF (intro), Azure
+Data Studio, Cosmos DB, Synapse - Build the Phase 1 mini-project (ADF
+pipeline: Python → Blob → ADF → SQL DB) - Pass the DP-900 exam 🎯</p>
+<hr/>
+<h2 id="week-3-phase-1-march-30-april-5">📅 WEEK 3 | Phase 1 | <span class="auto-date" data-fmt="MMMM D" data-offset="14">March 30</span>
+– <span class="auto-date" data-fmt="MMMM D" data-offset="20">April 5</span></h2>
+<h3 id="weekly-focus-2">Weekly Focus</h3>
+<ul>
+<li>Complete DP-900 Learning Paths 1–3 (core data concepts, relational,
+non-relational)</li>
+<li>Hands-on: Azure Data Studio + Azure SQL DB (AdventureWorks
+sample)</li>
+<li>Hands-on: Cosmos DB first container and queries</li>
+<li>Start Phase 1 mini-project data generation</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="14">Mon Mar 30</span></strong></td>
+<td><strong>DP-900 LP1: Core Data Concepts</strong> Identify types of
+data (structured/semi/unstructured), data roles
+(engineer/analyst/scientist), OLTP vs OLAP, batch vs streaming</td>
+<td><strong>DP-900 LP1 continued</strong> Data warehouses vs data lakes
+vs lakehouses. Transactional vs analytical workloads. Complete all
+knowledge checks</td>
+<td><strong>Azure Data Studio Setup</strong> Install Azure Data Studio.
+Connect to your Azure SQL DB. Explore the AdventureWorksLT sample
+database tables</td>
+<td>6.5h</td>
+<td>✅ LP1 complete ✅ Data Studio connected to Azure SQL DB</td>
+<td><a href="https://learn.microsoft.com/en-us/certifications/azure-data-fundamentals/" rel="noopener noreferrer" target="_blank">MS
+Learn DP-900</a> · <a href="https://learn.microsoft.com/en-us/azure-data-studio/download-azure-data-studio" rel="noopener noreferrer" target="_blank">Azure
+Data Studio</a></td>
+<td><strong>Checkpoint:</strong> DP-900 LP1 knowledge check passed</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="16">Tue Apr 1</span></strong></td>
+<td><strong>DP-900 LP2: Relational Data in Azure</strong> Azure SQL DB,
+Azure SQL Managed Instance, SQL Server on VM. Understand DTUs vs vCores
+pricing model</td>
+<td><strong>DP-900 LP2 continued</strong> Normalization, primary/foreign
+keys, indexes, views, stored procedures. Provision AdventureWorksLT
+sample DB</td>
+<td><strong>Lab: AdventureWorks SQL Queries</strong> Write 10 SQL
+queries in Data Studio on AdventureWorks: JOINs, aggregations, and
+window functions on real production-like data</td>
+<td>7h</td>
+<td>✅ LP2 complete ✅ AdventureWorks live ✅ 10 queries written</td>
+<td><a href="https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure" rel="noopener noreferrer" target="_blank">AdventureWorks
+setup</a></td>
+<td><strong>Deliverable:</strong> SQL query file with 10 AdventureWorks
+queries committed to GitHub</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="17">Wed Apr 2</span></strong></td>
+<td><strong>DP-900 LP3: Non-Relational Data</strong> Cosmos DB (Core
+SQL, MongoDB, Cassandra, Gremlin, Table APIs), Azure Blob, Azure File,
+Azure Queue, Azure Table Storage</td>
+<td><strong>DP-900 LP3 Lab</strong> Create a Cosmos DB account (free
+tier). Create a container. Insert 5 JSON documents. Query them with SQL
+API</td>
+<td><strong>DP-900 LP3 Deep Dive</strong> Understand when to use Blob vs
+Table vs Cosmos DB. Key-value, document, column-family, and graph
+database patterns</td>
+<td>7h</td>
+<td>✅ LP3 complete ✅ Cosmos DB container with 5 documents</td>
+<td><a href="https://learn.microsoft.com/en-us/certifications/azure-data-fundamentals/" rel="noopener noreferrer" target="_blank">MS
+Learn DP-900</a></td>
+<td><strong>Deliverable:</strong> Cosmos DB container with 5 documents +
+query screenshot</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="18">Thu Apr 3</span></strong></td>
+<td><strong>DP-900 LP4: Analytics in Azure</strong> Azure Synapse
+Analytics overview, Azure HDInsight, Azure Databricks, Azure Data
+Factory overview, Power BI basics</td>
+<td><strong>DP-900 LP4 Lab</strong> Create an Azure Synapse Analytics
+workspace. Explore Synapse Studio interface: Data, Develop, Integrate,
+Monitor, and Manage tabs</td>
+<td><strong>John Savill DP-900 Cram</strong> Watch the first half of
+John Savill’s DP-900 cram video (0:00–30:00). Take written notes</td>
+<td>7h</td>
+<td>✅ LP4 complete ✅ Synapse workspace created ✅ Cram video 1st half
+done</td>
+<td><a href="https://learn.microsoft.com/en-us/azure/synapse-analytics/" rel="noopener noreferrer" target="_blank">Synapse
+Analytics</a> · <a href="https://www.youtube.com/watch?v=U9I9rMl3Mf4" rel="noopener noreferrer" target="_blank">John Savill
+DP-900</a></td>
+<td><strong>Checkpoint:</strong> Synapse Studio opened and all 5 tabs
+explored</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="19">Fri Apr 4</span></strong></td>
+<td><strong>DP-900 LP5: Review &amp; Completion</strong> Complete any
+remaining DP-900 MS Learn modules. Review all knowledge checks and note
+any gaps</td>
+<td><strong>John Savill DP-900 Cram: Part 2</strong> Watch second half
+(30:00–end). Focus on comparison questions: when to use each
+service</td>
+<td><strong>DP-900 Practice Test #1</strong> Take the free official
+Microsoft DP-900 practice assessment. Score every answer and categorize
+by topic</td>
+<td>6.5h</td>
+<td>✅ All DP-900 LPs done ✅ Full cram video watched ✅ Practice test 1
+scored</td>
+<td><a href="https://learn.microsoft.com/en-us/certifications/azure-data-fundamentals/" rel="noopener noreferrer" target="_blank">DP-900
+Practice Assessment</a></td>
+<td><strong>Checkpoint:</strong> Practice test 1 score recorded — note
+it for progress tracking</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="20">Sat Apr 5</span></strong></td>
+<td><strong>Weak Area Deep Dive</strong> Review every wrong answer from
+practice test. Go to the exact MS Learn module for each gap. No moving
+on until understood</td>
+<td><strong>Phase 1 Mini-Project: Start</strong> Generate 500 fake
+customer order rows using Python <code>faker</code> library. Save as
+<code>orders.csv</code>. Include: order_id, customer_name, product,
+quantity, price, date</td>
+<td><strong>Blob Storage Lab</strong> Upload the generated CSV to Azure
+Blob Storage using the Python SDK. Verify the file appears in the Azure
+portal</td>
+<td>6.5h</td>
+<td>✅ Weak areas addressed ✅ 500-row fake dataset generated ✅ CSV in
+Blob Storage</td>
+<td><a href="https://faker.readthedocs.io/" rel="noopener noreferrer" target="_blank">Faker library</a></td>
+<td><strong>Deliverable:</strong> <code>generate_data.py</code> script +
+CSV file visible in Azure Blob Storage</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="21">Sun Apr 6</span></strong></td>
+<td><strong>Review &amp; Light Study</strong> Re-read DP-900 flashcards
+(max 1 hour). Review your data service comparison notes</td>
+<td><strong>Plan Week 4</strong> Read through Week 4 tasks carefully.
+Confirm all Azure resources are ready</td>
+<td><strong>Optional</strong> Alan Rodrigues Udemy DP-900 course — watch
+first 2 sections if purchased</td>
+<td>4–5h</td>
+<td>✅ Flashcards reviewed ✅ Week 4 planned</td>
+<td>—</td>
+<td><strong>Buffer/catch-up day</strong></td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="week-4-phase-1-april-612">📅 WEEK 4 | Phase 1 | <span class="auto-date" data-fmt="MMMM D" data-offset="21">April 6</span>–<span class="auto-date" data-fmt="D" data-offset="27">12</span></h2>
+<h3 id="weekly-focus-3">Weekly Focus</h3>
+<ul>
+<li>Build the complete Phase 1 mini-project (ADF: Blob → SQL DB pipeline
+end-to-end)</li>
+<li>Deep dive into Azure Data Factory UI, pipelines, copy activity, data
+flows</li>
+<li>DP-900 Practice Test #2 (target 90%+)</li>
+<li>Schedule your DP-900 exam for Week 5</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="21">Mon Apr 6</span></strong></td>
+<td><strong>Azure Data Factory: Intro</strong> MS Learn ADF module —
+linked services, datasets, pipelines, activities, integration runtime
+concepts</td>
+<td><strong>ADF Lab: First Pipeline</strong> Create an ADF instance.
+Create linked services for Blob and Azure SQL DB. Build a Copy Activity
+pipeline: Blob CSV → SQL DB table</td>
+<td><strong>ADF Lab: Debug &amp; Monitor</strong> Run the pipeline in
+debug mode. Use the Monitor tab to inspect run status, input/output, and
+duration. Fix any errors</td>
+<td>7h</td>
+<td>✅ ADF instance created ✅ First copy pipeline running</td>
+<td><a href="https://learn.microsoft.com/en-us/azure/data-factory/" rel="noopener noreferrer" target="_blank">MS
+Learn ADF</a></td>
+<td><strong>Deliverable:</strong> ADF pipeline copying CSV data from
+Blob to SQL DB (screenshot of successful run)</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="22">Tue Apr 7</span></strong></td>
+<td><strong>ADF: Triggers &amp; Parameters</strong> Schedule trigger,
+tumbling window trigger. Add parameters to your pipeline so source/sink
+paths are dynamic (not hardcoded)</td>
+<td><strong>ADF: Data Flows (Intro)</strong> Add a simple Data Flow:
+filter rows where quantity &gt; 0, add a derived column for
+<code>revenue = price × quantity</code></td>
+<td><strong>SQL Verification</strong> Connect Azure Data Studio to your
+SQL DB. Run queries to verify the copied and transformed data is correct
+and complete</td>
+<td>6.5h</td>
+<td>✅ Triggered pipeline running ✅ Basic data flow working ✅ Data
+verified in SQL</td>
+<td><a href="https://learn.microsoft.com/en-us/azure/data-factory/concepts-pipeline-runs" rel="noopener noreferrer" target="_blank">ADF
+triggers docs</a></td>
+<td><strong>Deliverable:</strong> Parameterized pipeline with schedule
+trigger running automatically</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="23">Wed Apr 8</span></strong></td>
+<td><strong>Phase 1 Mini-Project: Complete</strong> Polish the full
+pipeline — add error handling (try/catch activity in ADF), add logging
+via Azure Monitor. Run with 3 different CSV batches</td>
+<td><strong>Architecture Diagram</strong> Draw the mini-project
+architecture in draw.io: Python script → Blob → ADF → SQL DB → Azure
+Data Studio. Export as PNG</td>
+<td><strong>GitHub Documentation</strong> Export ADF ARM template. Write
+a detailed README explaining the project, setup steps, and
+architecture</td>
+<td>7h</td>
+<td>✅ Mini-project fully working ✅ Architecture diagram done ✅ GitHub
+README complete</td>
+<td><a href="https://app.diagrams.net/" rel="noopener noreferrer" target="_blank">draw.io</a></td>
+<td><strong>Deliverable:</strong> Phase 1 mini-project on GitHub with
+README + architecture diagram — recruiter-ready</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="24">Thu Apr 9</span></strong></td>
+<td><strong>DP-900 Full Review Session</strong> Systematically go
+through ALL DP-900 topic areas: relational, non-relational, analytics.
+Summarize each concept in your own words</td>
+<td><strong>DP-900 Practice Test #2</strong> Take a second practice
+assessment (use Whizlabs or a second Microsoft assessment if
+available)</td>
+<td><strong>Review Every Wrong Answer</strong> Deep dive on each
+incorrect answer. Use the specific MS Learn module to close each
+gap</td>
+<td>7h</td>
+<td>✅ Full topic review done ✅ Practice test 2 ≥90%</td>
+<td><a href="https://www.whizlabs.com/" rel="noopener noreferrer" target="_blank">Whizlabs DP-900</a></td>
+<td><strong>Checkpoint:</strong> Score ≥90% on practice test 2</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="25">Fri Apr 10</span></strong></td>
+<td><strong>Azure Lab: Stream Analytics Preview</strong> Create a Stream
+Analytics job with a test input. Run a simple pass-through query.
+Understand the streaming model for DP-900</td>
+<td><strong>DP-900 Exam Cram: Final Round</strong> Rewatch key
+comparison sections of John Savill video. Focus on: when to use Cosmos
+DB vs SQL DB, streaming vs batch, analytics services</td>
+<td><strong>Schedule DP-900 Exam</strong> Go to Microsoft Certification
+portal. Schedule DP-900 for <span class="auto-date" data-fmt="MMMM D" data-offset="33">April 18</span> or 19. Complete the Exam Sandbox to
+know exactly what to expect</td>
+<td>6.5h</td>
+<td>✅ Stream Analytics explored ✅ Exam scheduled</td>
+<td><a href="https://learn.microsoft.com/en-us/certifications/azure-data-fundamentals/" rel="noopener noreferrer" target="_blank">Schedule
+exam</a></td>
+<td><strong>Checkpoint:</strong> DP-900 exam confirmed and booked for
+Week 5</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="26">Sat Apr 11</span></strong></td>
+<td><strong>Python: pandas Advanced Review</strong> Practice any weak
+areas: multi-index, apply/lambda, string operations. 3 HackerRank medium
+Python challenges</td>
+<td><strong>SQL: Window Functions Deep Practice</strong> Write 10
+advanced window function queries on AdventureWorks: running totals,
+PERCENTILE_CONT, gaps and islands patterns</td>
+<td><strong>Portfolio: GitHub Cleanup</strong> Review both Phase 0 ETL
+and Phase 1 ADF project repos. Ensure clean READMEs, working code, and
+no debug artifacts</td>
+<td>6.5h</td>
+<td>✅ pandas solid ✅ Window functions mastered ✅ GitHub clean</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> 2 clean, well-documented GitHub
+projects visible to recruiters</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="27">Sun Apr 12</span></strong></td>
+<td><strong>Rest / Light Study Day</strong> Review DP-900 flashcards — 1
+hour maximum. Light reading on Azure data services blogs</td>
+<td><strong>Optional</strong> Alan Rodrigues Udemy DP-900 — any
+remaining sections not yet watched</td>
+<td>—</td>
+<td>3–4h</td>
+<td>✅ Flashcards reviewed</td>
+<td>—</td>
+<td><strong>Buffer day — recharge before exam week!</strong></td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="week-5-phase-1-april-1319-exam-week">📅 WEEK 5 | Phase 1 | April
+13–19 ⭐ EXAM WEEK</h2>
+<h3 id="weekly-focus-4">Weekly Focus</h3>
+<ul>
+<li>Final DP-900 preparation</li>
+<li>Take and pass DP-900 exam 🎯</li>
+<li>Begin Phase 2 setup (Databricks workspace, deeper Synapse
+exploration)</li>
+<li>Celebrate your first Azure certification!</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="28">Mon Apr 13</span></strong></td>
+<td><strong>DP-900: Full Mock Exam</strong> Take a timed 60-minute
+practice exam (45 questions). Simulate real conditions — no notes, no
+looking things up</td>
+<td><strong>Wrong Answer Analysis</strong> Every wrong answer: find the
+MS Learn module, re-read it, write a 1-sentence plain-English
+explanation in your notes</td>
+<td><strong>DP-900 Speed Review</strong> Flash through all key
+comparison tables: Cosmos DB APIs, SQL offerings, Analytics services,
+batch vs streaming</td>
+<td>7h</td>
+<td>✅ Mock exam ≥90% ✅ All gaps closed ✅ Comparison tables
+reviewed</td>
+<td>—</td>
+<td><strong>Checkpoint:</strong> Mock exam score ≥90%</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="29">Tue Apr 14</span></strong></td>
+<td><strong>DP-900: Remaining Weak Spots Only</strong> Focus only on any
+areas still below 85% from the mock. Use Udemy or MS Learn for those
+specific topics only</td>
+<td><strong>Hands-on: Reinforce Labs</strong> Repeat any lab you felt
+uncertain about: ADF copy, Cosmos DB query, Synapse exploration</td>
+<td><strong>Mental Preparation</strong> Review exam tips: question
+types, flagging for review, time management. Plan a good night’s sleep
+for tomorrow</td>
+<td>6h</td>
+<td>✅ All weak spots addressed ✅ Confidence high</td>
+<td>—</td>
+<td><strong>You are ready. Trust your preparation.</strong></td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="30">Wed Apr 15</span></strong></td>
+<td><strong>Light Review Only</strong> 1 hour maximum: flashcards and
+key comparison tables. Do NOT cram any new material today</td>
+<td><strong>Rest &amp; Recharge</strong> Take a walk, eat a good meal,
+relax. Your brain needs rest to consolidate learning</td>
+<td><strong>Logistics</strong> Confirm exam booking, test webcam and ID
+(if online proctored). Prepare your photo ID</td>
+<td>3h</td>
+<td>✅ Rested and ready</td>
+<td>—</td>
+<td><strong>Exam day tomorrow — light day, sleep well 😴</strong></td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="31">Thu Apr 16</span></strong></td>
+<td><strong>Buffer / Catch-up Day</strong> If exam is <span class="auto-date" data-fmt="MMMM D" data-offset="33">April 18</span>/19, use
+today to catch up on anything remaining. Or get ahead by reading Phase 2
+overview</td>
+<td><strong>Phase 2 Preview</strong> Read through Phase 2 roadmap. Watch
+first 20 minutes of Adam Marczak’s ADF YouTube series</td>
+<td><strong>GitHub: Phase 1 Wrap-up</strong> Tag your repos with
+“phase-0-complete” and “phase-1-complete” topics on GitHub</td>
+<td>6h</td>
+<td>✅ Phase 2 preview done ✅ GitHub tags added</td>
+<td><a href="https://www.youtube.com/playlist?list=PLMWaZ4qt_gRzo5xG9p56j8kO1bJzgZgGp" rel="noopener noreferrer" target="_blank">Adam
+Marczak ADF</a></td>
+<td>—</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="32">Fri Apr 17</span></strong></td>
+<td><strong>Final DP-900 Prep</strong> One last pass through all
+knowledge checks on MS Learn. Close any remaining gaps</td>
+<td><strong>Relax &amp; Prepare</strong> Do something enjoyable. Cook a
+good meal. Watch something fun. You’ve done the work</td>
+<td>—</td>
+<td>2–3h</td>
+<td>✅ All prep complete</td>
+<td>—</td>
+<td><strong>Exam tomorrow — sleep well!</strong></td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="33">Sat Apr 18</span></strong></td>
+<td>⭐ <strong>DP-900 EXAM DAY</strong> 🎯 Take the DP-900 exam. Read
+each question carefully. You have 60 minutes for 45 questions — pace
+yourself</td>
+<td>Rest and celebrate after — regardless of outcome you’ve made it this
+far</td>
+<td>—</td>
+<td>—</td>
+<td><strong>DP-900 EXAM</strong></td>
+<td><a href="https://home.pearsonvue.com/microsoft" rel="noopener noreferrer" target="_blank">Pearson VUE</a></td>
+<td><strong>🎉 DP-900 CERTIFIED (expected)!</strong></td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="34">Sun Apr 19</span></strong></td>
+<td><strong>Celebrate &amp; Reset</strong> 🎉 True rest day. Post on
+LinkedIn: “Passed DP-900!” Add certification to LinkedIn profile
+immediately</td>
+<td><strong>Phase 2 Kickoff Prep</strong> Create an Azure Databricks
+workspace. Review Phase 2 week-by-week plan</td>
+<td>—</td>
+<td>3–4h</td>
+<td>✅ LinkedIn updated ✅ Databricks workspace created</td>
+<td>—</td>
+<td><strong>Phase 1 COMPLETE — DP-900 Certified! 🎉</strong></td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<blockquote>
+<p>🎉 <strong>Phase 1 Milestone:</strong> DP-900 certified — your first
+official Azure credential is on LinkedIn. Now the serious data
+engineering work begins. Everything in Phase 2 builds directly toward
+DP-203 and your first job.</p>
+</blockquote>
+<hr/>
+<h1 id="phase-2-core-data-engineering-dp-203-deep-dive-weeks-613">🟩
+PHASE 2: Core Data Engineering — DP-203 Deep Dive (Weeks 6–13)</h1>
+<p><strong>Dates:</strong> <span class="auto-date" data-fmt="MMMM D" data-offset="35">April 20</span> – <span class="auto-date" data-fmt="MMMM D" data-offset="90">June 14</span>, 2026</p>
+<p><strong>Phase 2 Goals:</strong> - Master Azure Data Factory: advanced
+pipelines, data flows, incremental loads, monitoring - Master Azure
+Databricks: PySpark, Delta Lake, optimization, Structured Streaming -
+Master Azure Synapse Analytics: dedicated pool, serverless SQL, star
+schema design - Master ADLS Gen2: medallion architecture, partitioning,
+file formats - Learn Streaming: Event Hubs + Stream Analytics - Build
+Portfolio Project 1: End-to-End Sales Analytics Pipeline</p>
+<hr/>
+<h2 id="week-6-phase-2-april-2026">📅 WEEK 6 | Phase 2 | April
+20–26</h2>
+<h3 id="weekly-focus-5">Weekly Focus</h3>
+<ul>
+<li>DP-203 MS Learn LP1: Data storage in Azure</li>
+<li>Deep dive into ADLS Gen2 (hierarchical namespace, medallion
+architecture, file formats)</li>
+<li>ADF: advanced patterns, parameterized pipelines, data flows</li>
+<li>Udemy DP-203: sections 1–3</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="35">Mon Apr 20</span></strong></td>
+<td><strong>DP-203 MS Learn LP1: Data Storage</strong> Azure Storage
+accounts, ADLS Gen2 (hierarchical namespace), Blob storage tiers
+(Hot/Cool/Archive), shared access signatures, access control</td>
+<td><strong>ADLS Gen2 Lab</strong> Create a Storage Account with HNS
+enabled. Create 3 containers: <code>raw</code>, <code>processed</code>,
+<code>curated</code>. Upload files via portal + Azure CLI</td>
+<td><strong>ADF: Linked Service to ADLS</strong> Add ADLS Gen2 as a
+linked service in your ADF. Create a pipeline that copies data from
+standard Blob to ADLS Gen2</td>
+<td>7h</td>
+<td>✅ ADLS Gen2 with 3-zone structure ✅ ADF copy to ADLS working</td>
+<td><a href="https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction" rel="noopener noreferrer" target="_blank">MS
+Learn ADLS Gen2</a></td>
+<td><strong>Deliverable:</strong> ADLS Gen2 with raw/processed/curated
+zones + ADF copy pipeline confirmed</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="36">Tue Apr 21</span></strong></td>
+<td><strong>DP-203: Data Lake Design</strong> Medallion architecture
+(Bronze/Silver/Gold). File formats comparison: CSV vs JSON vs Parquet vs
+Delta. Partitioning strategies (by date, by region)</td>
+<td><strong>Udemy DP-203: Sections 1–2</strong> Alan Rodrigues —
+Introduction and Azure storage for data engineering</td>
+<td><strong>ADF: Parameterized Pipelines</strong> Build a pipeline where
+source and sink paths are parameters (dynamic ADLS paths). This is an
+industry best practice you’ll use for every project</td>
+<td>7h</td>
+<td>✅ Medallion architecture understood ✅ Parameterized ADF pipeline
+working</td>
+<td><a href="https://www.udemy.com/course/dp203-azure-data-engineer/" rel="noopener noreferrer" target="_blank">Udemy
+DP-203</a></td>
+<td><strong>Deliverable:</strong> ADF pipeline with parameterized source
+and sink ADLS paths</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="37">Wed Apr 22</span></strong></td>
+<td><strong>ADF: Data Flows Deep Dive</strong> MS Learn + Adam Marczak
+video. Mapping data flows vs wrangling data flows. Core transformations:
+derived column, filter, join, aggregate, sink</td>
+<td><strong>ADF Lab: Complex Data Flow</strong> Build a data flow that:
+joins two datasets, filters out nulls, aggregates revenue by month, and
+writes output as Parquet to ADLS</td>
+<td><strong>Adam Marczak ADF Video</strong> Watch episodes 3–4 from his
+ADF YouTube playlist</td>
+<td>7h</td>
+<td>✅ Complex data flow built ✅ Parquet files written to ADLS</td>
+<td><a href="https://www.youtube.com/playlist?list=PLMWaZ4qt_gRzo5xG9p56j8kO1bJzgZgGp" rel="noopener noreferrer" target="_blank">Adam
+Marczak ADF</a></td>
+<td><strong>Deliverable:</strong> ADF data flow producing Parquet output
+in ADLS/processed zone</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="38">Thu Apr 23</span></strong></td>
+<td><strong>ADF: Incremental Load Pattern</strong> Understand the
+watermark pattern for incremental data loading. Create a
+<code>watermark</code> tracking table in Azure SQL DB</td>
+<td><strong>ADF Lab: Incremental Load</strong> Build a complete
+incremental load pipeline: read watermark → load only new/modified rows
+→ update watermark table. Test it works</td>
+<td><strong>Udemy DP-203: Section 3</strong> Alan Rodrigues — ADF deep
+dive in the course</td>
+<td>7h</td>
+<td>✅ Incremental load pipeline working</td>
+<td><a href="https://github.com/MicrosoftLearning/DP-203T00-Data-Engineering-on-Microsoft-Azure" rel="noopener noreferrer" target="_blank">DP-203
+Lab repo</a></td>
+<td><strong>Deliverable:</strong> Incremental pipeline — run twice,
+verify only new rows loaded on 2nd run</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="39">Fri Apr 24</span></strong></td>
+<td><strong>ADF: Monitoring &amp; Alerts</strong> Tumbling window
+triggers, event-based triggers. Set up Azure Monitor alert rule for ADF
+pipeline failures (email notification)</td>
+<td><strong>ADF: Self-Hosted Integration Runtime</strong> Understand
+SHIR concept for on-premises data access. Watch demo video. Know when to
+recommend it in an interview</td>
+<td><strong>DP-203 GitHub Lab 1</strong> Complete official Microsoft
+DP-203 Lab 1 from the GitHub lab repository</td>
+<td>7h</td>
+<td>✅ Monitor alert configured ✅ SHIR concepts clear ✅ Lab 1
+done</td>
+<td><a href="https://github.com/MicrosoftLearning/DP-203T00-Data-Engineering-on-Microsoft-Azure" rel="noopener noreferrer" target="_blank">DP-203
+Labs GitHub</a></td>
+<td><strong>Deliverable:</strong> Azure Monitor alert rule live for ADF
+pipeline failure</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="40">Sat Apr 25</span></strong></td>
+<td><strong>Week Review: ADF Cheat Sheet</strong> Summarize everything
+learned about ADF: activities, triggers, integration runtime types, data
+flow transformations</td>
+<td><strong>SQL Practice on Azure SQL DB</strong> Write 10 queries on
+your Azure SQL DB covering window functions, CTEs, PIVOT, and dynamic
+SQL</td>
+<td><strong>Portfolio Notes</strong> Update your project README with ADF
+architecture details and diagrams</td>
+<td>6h</td>
+<td>✅ ADF cheat sheet created ✅ 10 SQL queries written ✅ README
+updated</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> ADF cheat sheet (Markdown format)
+committed to GitHub</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="41">Sun Apr 26</span></strong></td>
+<td><strong>Rest / Buffer Day</strong> Catch up on anything from this
+week. Optional: watch 1 Adam Marczak ADF video</td>
+<td>—</td>
+<td>—</td>
+<td>3–4h</td>
+<td>Buffer day</td>
+<td>—</td>
+<td>—</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="week-7-phase-2-april-27-may-3">📅 WEEK 7 | Phase 2 | <span class="auto-date" data-fmt="MMMM D" data-offset="42">April 27</span> –
+<span class="auto-date" data-fmt="MMMM D" data-offset="48">May 3</span></h2>
+<h3 id="weekly-focus-6">Weekly Focus</h3>
+<ul>
+<li>Azure Databricks: cluster setup, Notebooks, PySpark
+fundamentals</li>
+<li>Spark architecture, DataFrames, transformations vs actions</li>
+<li>Delta Lake: ACID transactions, time travel, MERGE/UPSERT</li>
+<li>Read from ADLS, transform, write back in Delta format</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="42">Mon Apr 27</span></strong></td>
+<td><strong>Databricks: Setup &amp; Architecture</strong> Explore your
+Databricks workspace. Understand: clusters (all-purpose vs job
+clusters), runtime versions, cluster configuration best practices</td>
+<td><strong>Databricks: First Notebook</strong> Create a cluster. Run a
+Hello World notebook. Understand cell types (Python, SQL, Markdown).
+Mount ADLS Gen2 to Databricks using service principal or managed
+identity</td>
+<td><strong>PySpark Basics</strong> Read your CSV into a Spark
+DataFrame. Use <code>.show()</code>, <code>.schema</code>,
+<code>.printSchema()</code>, <code>.count()</code>. Compare syntax to
+pandas</td>
+<td>7h</td>
+<td>✅ Databricks cluster running ✅ ADLS mounted ✅ First Spark
+DataFrame created</td>
+<td><a href="https://learn.microsoft.com/en-us/azure/databricks/" rel="noopener noreferrer" target="_blank">Databricks
+docs</a></td>
+<td><strong>Deliverable:</strong> Databricks notebook reading from ADLS
+and displaying 5 rows</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="43">Tue Apr 28</span></strong></td>
+<td><strong>PySpark: Transformations</strong> <code>select</code>,
+<code>filter</code>, <code>withColumn</code>, <code>groupBy</code>,
+<code>agg</code>, <code>orderBy</code>, <code>join</code>. Apply to your
+sales dataset. Understand lazy evaluation</td>
+<td><strong>PySpark: Window Functions</strong>
+<code>Window.partitionBy()</code>, <code>rank()</code>,
+<code>lag()</code>, <code>lead()</code>, <code>rowsBetween()</code>.
+Replicate your SQL window functions in PySpark — the syntax difference
+is important</td>
+<td><strong>Udemy DP-203: Databricks Section</strong> Alan Rodrigues —
+Azure Databricks for data engineers</td>
+<td>7h</td>
+<td>✅ 10 PySpark transformation operations ✅ Window functions in Spark
+working</td>
+<td><a href="https://spark.apache.org/docs/latest/api/python/" rel="noopener noreferrer" target="_blank">PySpark
+docs</a></td>
+<td><strong>Deliverable:</strong> Databricks notebook with 10 different
+transformations on sales data</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="44">Wed Apr 29</span></strong></td>
+<td><strong>PySpark: File Formats</strong> Read/write Parquet, Delta,
+JSON with Spark. Understand Parquet schema evolution. Write your
+transformed data to ADLS as Parquet</td>
+<td><strong>Delta Lake: Introduction</strong> What is Delta Lake? ACID
+transactions on data lakes, time travel, the MERGE/UPSERT operation.
+Delta is the standard in modern data engineering</td>
+<td><strong>Delta Lake Lab</strong> Convert your Parquet data to Delta
+format. Run a MERGE (UPSERT). Use time travel
+(<code>VERSION AS OF 0</code>) to query a previous state</td>
+<td>7h</td>
+<td>✅ Delta Lake tables created ✅ MERGE operation working ✅ Time
+travel query successful</td>
+<td><a href="https://docs.delta.io/latest/index.html" rel="noopener noreferrer" target="_blank">Delta Lake
+docs</a></td>
+<td><strong>Deliverable:</strong> Databricks notebook demonstrating
+Delta MERGE + time travel</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="45">Thu Apr 30</span></strong></td>
+<td><strong>PySpark: Optimization</strong> Partitioning, caching
+(<code>.cache()</code>, <code>.persist()</code>), broadcast joins,
+<code>explain()</code>, Adaptive Query Execution. Run a slow query and
+optimize it step by step</td>
+<td><strong>Databricks: SQL Warehouse</strong> Create a SQL Warehouse.
+Run SQL queries on your Delta tables. Compare query performance vs
+PySpark</td>
+<td><strong>Udemy DP-203: Spark Optimization</strong> Review the
+performance tuning section in Alan Rodrigues course</td>
+<td>7h</td>
+<td>✅ Query optimized with broadcast join ✅ SQL Warehouse running ✅
+explain() understood</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Notebook with before/after query
+performance comparison (times documented)</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="46">Fri May 1</span></strong></td>
+<td><strong>Databricks: Workflows &amp; Jobs</strong> Create a
+Databricks Job that runs a notebook on a schedule. Understand job
+clusters (cheaper for automated runs) vs all-purpose clusters</td>
+<td><strong>DP-203 GitHub Lab: Databricks</strong> Complete the official
+DP-203 lab exercises for Databricks</td>
+<td><strong>ADF + Databricks Integration</strong> Create an ADF pipeline
+that calls a Databricks notebook using the Databricks linked service in
+ADF</td>
+<td>7h</td>
+<td>✅ Databricks Job created ✅ ADF triggers Databricks notebook
+successfully</td>
+<td><a href="https://github.com/MicrosoftLearning/DP-203T00-Data-Engineering-on-Microsoft-Azure" rel="noopener noreferrer" target="_blank">DP-203
+Labs GitHub</a></td>
+<td><strong>Deliverable:</strong> ADF pipeline that triggers a
+Databricks transformation notebook end-to-end</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="47">Sat May 2</span></strong></td>
+<td><strong>Spark &amp; Databricks Cheat Sheet</strong> Summarize: RDD
+vs DataFrame vs Dataset, transformations vs actions, lazy evaluation,
+shuffle and skew, optimization techniques</td>
+<td><strong>Python + Spark Deep Practice</strong> Write a complete
+notebook: read raw CSV from ADLS Bronze, apply 5 transformations to
+clean and aggregate, write Delta to Silver zone</td>
+<td><strong>Portfolio: Databricks Section</strong> Add a Databricks
+section to your portfolio README. Include notebook screenshot and
+transformation summary</td>
+<td>6.5h</td>
+<td>✅ Cheat sheet done ✅ Bronze→Silver pipeline notebook ✅ Portfolio
+updated</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Bronze→Silver Databricks
+transformation notebook committed to GitHub</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="48">Sun May 3</span></strong></td>
+<td><strong>Rest / Buffer Day</strong> Catch up on anything from the
+week. Optional: HackerRank — 3 SQL hard problems</td>
+<td>—</td>
+<td>—</td>
+<td>3–4h</td>
+<td>Buffer</td>
+<td>—</td>
+<td>—</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="week-8-phase-2-may-410">📅 WEEK 8 | Phase 2 | <span class="auto-date" data-fmt="MMMM D" data-offset="49">May 4</span>–<span class="auto-date" data-fmt="D" data-offset="55">10</span></h2>
+<h3 id="weekly-focus-7">Weekly Focus</h3>
+<ul>
+<li>Azure Synapse Analytics deep dive: dedicated SQL pool, serverless
+SQL</li>
+<li>Table distribution strategies, loading patterns, star schema
+design</li>
+<li>Synapse Spark pool comparison with Databricks</li>
+<li>Udemy DP-203: Synapse Analytics sections</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="49">Mon May 4</span></strong></td>
+<td><strong>Synapse: Architecture Overview</strong> Synapse Studio,
+workspaces, pool types. Dedicated SQL pool vs Serverless SQL pool vs
+Spark pool vs Data Explorer pool — when to use each</td>
+<td><strong>Synapse: Serverless SQL Pool</strong> Query Parquet files in
+ADLS directly with <code>OPENROWSET</code>. Create external tables and
+views on top of your ADLS data without moving it</td>
+<td><strong>Lab: Query ADLS with Serverless SQL</strong> Use serverless
+SQL to query your existing Parquet files from earlier weeks — no data
+loading required</td>
+<td>7h</td>
+<td>✅ Synapse workspace explored ✅ OPENROWSET queries returning
+data</td>
+<td><a href="https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/on-demand-workspace-overview" rel="noopener noreferrer" target="_blank">Synapse
+serverless docs</a></td>
+<td><strong>Deliverable:</strong> SQL script with 3 OPENROWSET queries
+on ADLS Parquet files</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="50">Tue May 5</span></strong></td>
+<td><strong>Synapse: Dedicated SQL Pool</strong> Create a DW100c
+dedicated pool. Understand distribution types: HASH (for large fact
+tables), ROUND_ROBIN (for staging), REPLICATE (for small dims)</td>
+<td><strong>PolyBase &amp; COPY INTO</strong> Use <code>COPY INTO</code>
+statement to load Parquet from ADLS into the dedicated pool. Understand
+differences from PolyBase approach</td>
+<td><strong>Synapse: Table Indexes</strong> Columnstore indexes (default
+in Synapse), clustered vs non-clustered. Run queries and examine
+execution plans</td>
+<td>7h</td>
+<td>✅ Dedicated pool created ✅ COPY INTO working ✅ Columnstore index
+added</td>
+<td><a href="https://learn.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/" rel="noopener noreferrer" target="_blank">Synapse
+dedicated pool docs</a></td>
+<td><strong>Deliverable:</strong> Dedicated SQL pool with 3 tables
+loaded from ADLS via COPY INTO</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="51">Wed May 6</span></strong></td>
+<td><strong>Synapse: Spark Pool</strong> Create a Spark pool in Synapse
+Studio. Run the same transformation notebooks you built in Databricks.
+Compare the developer experience</td>
+<td><strong>Synapse: Pipelines vs ADF</strong> Synapse Pipelines are
+built into Synapse Studio. Understand the overlap and differences vs
+standalone ADF. Create a simple Synapse pipeline</td>
+<td><strong>Udemy DP-203: Synapse Section</strong> Alan Rodrigues —
+Azure Synapse Analytics for DP-203</td>
+<td>7h</td>
+<td>✅ Synapse Spark pool used ✅ Synapse pipeline created ✅ Comparison
+notes written</td>
+<td><a href="https://www.udemy.com/course/dp203-azure-data-engineer/" rel="noopener noreferrer" target="_blank">Udemy
+DP-203</a></td>
+<td><strong>Deliverable:</strong> 1-page comparison doc: Synapse
+Pipelines vs ADF (on GitHub)</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="52">Thu May 7</span></strong></td>
+<td><strong>Synapse: Star Schema Design</strong> Design a star schema
+for your sales data: 1 fact table + 4 dimension tables. Understand
+surrogate keys, slowly changing dimensions (SCD Type 1 vs 2)</td>
+<td><strong>ETL into Star Schema</strong> Write an ADF or Synapse
+pipeline to load your fact and dimension tables from ADLS Gold zone</td>
+<td><strong>Synapse: Query Performance</strong> Run analytical queries
+on your star schema, use <code>EXPLAIN</code>, check the query store,
+identify and fix bottlenecks</td>
+<td>7h</td>
+<td>✅ Star schema implemented in Synapse ✅ ETL pipeline loading all
+tables</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Star schema (fact_sales + dim_customer
++ dim_date + dim_product) live in Synapse</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="53">Fri May 8</span></strong></td>
+<td><strong>DP-203 GitHub Labs: Synapse</strong> Complete official
+DP-203 Synapse lab exercises from the GitHub lab repository</td>
+<td><strong>Synapse: Monitoring &amp; Alerts</strong> Use Synapse Studio
+monitoring tab. Set up an Azure Monitor metric alert for dedicated pool
+DWU usage exceeding threshold</td>
+<td><strong>Week 8 Review</strong> Write a summary: when to use
+dedicated SQL pool vs serverless SQL pool. Add to your cheat sheet</td>
+<td>7h</td>
+<td>✅ DP-203 Synapse labs done ✅ Monitor alert configured</td>
+<td><a href="https://github.com/MicrosoftLearning/DP-203T00-Data-Engineering-on-Microsoft-Azure" rel="noopener noreferrer" target="_blank">DP-203
+Labs GitHub</a></td>
+<td><strong>Checkpoint:</strong> All DP-203 Synapse lab exercises
+completed</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="54">Sat May 9</span></strong></td>
+<td><strong>SQL Deep Practice: Synapse SQL</strong> Write 10 complex
+queries on your star schema: multi-table joins, date-based aggregations,
+year-over-year comparisons, running totals</td>
+<td><strong>Portfolio: Synapse Section</strong> Document your Synapse
+setup in GitHub. Add architecture diagram showing ADLS → Synapse data
+flow</td>
+<td><strong>IMPORTANT: Pause Dedicated Pool</strong> Scale down or pause
+the Synapse dedicated pool when not actively using it to protect your
+Azure credits</td>
+<td>6.5h</td>
+<td>✅ 10 complex queries written ✅ Portfolio updated ✅ Pool
+paused</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> 10 analytical SQL queries on star
+schema committed to GitHub</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="55">Sun May 10</span></strong></td>
+<td><strong>Rest / Buffer Day</strong> Light review of Synapse vs
+Databricks decision matrix. Take a proper rest</td>
+<td>—</td>
+<td>—</td>
+<td>3–4h</td>
+<td>Buffer</td>
+<td>—</td>
+<td>—</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="week-9-phase-2-may-1117">📅 WEEK 9 | Phase 2 | <span class="auto-date" data-fmt="MMMM D" data-offset="56">May 11</span>–<span class="auto-date" data-fmt="D" data-offset="62">17</span></h2>
+<h3 id="weekly-focus-8">Weekly Focus</h3>
+<ul>
+<li>Streaming: Azure Event Hubs + Stream Analytics (windowed queries,
+anomaly detection)</li>
+<li>Power BI: connect to Synapse, build a simple dashboard</li>
+<li>Complete DP-203 streaming learning path on MS Learn</li>
+<li>Begin Portfolio Project 1 architecture and data generation</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="56">Mon May 11</span></strong></td>
+<td><strong>Streaming Concepts</strong> Batch vs streaming, event time
+vs processing time, windowing types (tumbling, hopping, sliding,
+session), watermarks for late data</td>
+<td><strong>Event Hubs: Setup</strong> Create an Event Hubs namespace
+and hub. Understand partitions, consumer groups, and retention period
+settings</td>
+<td><strong>Event Hubs: Python Producer</strong> Write a Python script
+that sends 100 fake sensor events per minute to Event Hubs. Each event
+has: sensor_id, temperature, pressure, timestamp</td>
+<td>7h</td>
+<td>✅ Streaming concepts understood ✅ Event Hub created ✅ Python
+producer sending events</td>
+<td><a href="https://learn.microsoft.com/en-us/azure/event-hubs/" rel="noopener noreferrer" target="_blank">Event
+Hubs docs</a></td>
+<td><strong>Deliverable:</strong> Python IoT producer script
+continuously sending events to Event Hubs</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="57">Tue May 12</span></strong></td>
+<td><strong>Stream Analytics: Setup &amp; Basic Queries</strong> Create
+a Stream Analytics job. Add Event Hub as input, ADLS as output. Write a
+pass-through query to verify data is flowing</td>
+<td><strong>Stream Analytics: Windowed Aggregations</strong> Write
+windowed queries: 5-minute tumbling window computing COUNT and AVG of
+sensor readings. Verify output in ADLS</td>
+<td><strong>Lab: Streaming → ADLS</strong> Run the Stream Analytics job
+for 15 minutes. Check ADLS output files (JSON/Parquet). Verify data and
+record event counts</td>
+<td>7h</td>
+<td>✅ Stream Analytics job running ✅ 5-min window aggregations working
+✅ Data landing in ADLS</td>
+<td><a href="https://learn.microsoft.com/en-us/azure/stream-analytics/" rel="noopener noreferrer" target="_blank">Stream
+Analytics docs</a></td>
+<td><strong>Deliverable:</strong> Stream Analytics job with windowed
+aggregations writing to ADLS</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="58">Wed May 13</span></strong></td>
+<td><strong>Stream Analytics: Anomaly Detection</strong> Use built-in ML
+functions: <code>AnomalyDetection_SpikeAndDip</code>. Detect temperature
+spikes in your sensor stream. Route anomalies to a separate output</td>
+<td><strong>Power BI: Connect to Synapse</strong> Install Power BI
+Desktop. Connect to Synapse serverless SQL. Build a 3-visual dashboard
+on your sales data (bar chart, line chart, KPI card)</td>
+<td><strong>DP-203 GitHub Lab: Streaming</strong> Complete the streaming
+lab from the official DP-203 GitHub lab repository</td>
+<td>7h</td>
+<td>✅ Anomaly detection working ✅ Power BI dashboard built (3 visuals)
+✅ Streaming lab done</td>
+<td><a href="https://github.com/MicrosoftLearning/DP-203T00-Data-Engineering-on-Microsoft-Azure" rel="noopener noreferrer" target="_blank">DP-203
+Labs GitHub</a></td>
+<td><strong>Deliverable:</strong> Power BI .pbix dashboard file
+committed to GitHub</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="59">Thu May 14</span></strong></td>
+<td><strong>Udemy DP-203: Streaming Section</strong> Alan Rodrigues —
+Event Hubs and Stream Analytics for the DP-203 exam</td>
+<td><strong>Stream Analytics → Power BI Real-Time</strong> Add Power BI
+as a Stream Analytics output. Create a real-time Power BI streaming
+dashboard. Watch events appear live!</td>
+<td><strong>Log Analytics: Setup</strong> Create a Log Analytics
+workspace. Connect ADF and Synapse diagnostic settings to stream logs to
+it</td>
+<td>7h</td>
+<td>✅ Real-time Power BI dashboard live ✅ Log Analytics workspace
+configured</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Real-time dashboard showing live
+sensor events (screenshot)</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="60">Fri May 15</span></strong></td>
+<td><strong>MS Learn DP-203: Streaming Learning Path</strong> Complete
+the official DP-203 streaming module end-to-end on MS Learn. Complete
+all knowledge checks</td>
+<td><strong>Review: Service Comparison Table</strong> Build a comparison
+table: Event Hubs vs IoT Hub vs Service Bus vs Event Grid. When to use
+each. This is a common interview and exam question</td>
+<td><strong>Project 1 Prep</strong> Re-read the project 1 spec. List all
+Azure components needed. Create a GitHub repo:
+<code>azure-sales-analytics-pipeline</code></td>
+<td>7h</td>
+<td>✅ MS Learn streaming complete ✅ Service comparison table done ✅
+Project 1 repo created</td>
+<td>—</td>
+<td><strong>Checkpoint:</strong> Project 1 GitHub repo with README
+outline is live</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="61">Sat May 16</span></strong></td>
+<td><strong>Portfolio Project 1: Architecture Design</strong> Draw the
+complete architecture in draw.io: Azure SQL DB (source) + Blob (CSV
+files) → ADF → ADLS Bronze → Databricks → ADLS Gold → Synapse → Power
+BI</td>
+<td><strong>Portfolio Project 1: Data Generation</strong> Write Python
+scripts generating 3 files: <code>products.csv</code> (100 rows),
+<code>customers.csv</code> (500 rows), <code>orders.csv</code> (2000
+rows). Realistic, varied data</td>
+<td><strong>Upload to ADLS Bronze</strong> Push all CSV files to your
+ADLS <code>raw</code>/Bronze container. Verify in Azure portal</td>
+<td>6.5h</td>
+<td>✅ Architecture diagram done ✅ 3 realistic CSV datasets (2600+
+rows) ✅ Data in ADLS Bronze</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Architecture diagram PNG + raw data in
+ADLS Bronze confirmed</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="62">Sun May 17</span></strong></td>
+<td><strong>Rest / Buffer Day</strong> Catch up on any week’s content.
+Take a proper rest</td>
+<td>—</td>
+<td>—</td>
+<td>3–4h</td>
+<td>Buffer</td>
+<td>—</td>
+<td>—</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="week-10-phase-2-may-1824">📅 WEEK 10 | Phase 2 | <span class="auto-date" data-fmt="MMMM D" data-offset="63">May 18</span>–<span class="auto-date" data-fmt="D" data-offset="69">24</span></h2>
+<h3 id="weekly-focus-9">Weekly Focus</h3>
+<ul>
+<li>Build Portfolio Project 1: ADF ingestion layer (full + incremental
+loads)</li>
+<li>Build Databricks transformation layer (Bronze→Silver→Gold)</li>
+<li>Load to Synapse and build Power BI dashboard</li>
+<li>Set up pipeline monitoring and alerting</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="63">Mon May 18</span></strong></td>
+<td><strong>Project 1: ADF Full Load Pipeline</strong> Build ADF
+pipeline: full load from Azure SQL DB (simulating on-prem) → ADLS
+Bronze. Run for all 3 tables (products, customers, orders)</td>
+<td><strong>Project 1: ADF Incremental Load</strong> Build
+watermark-based incremental pipeline for the orders table. Insert new
+rows into source, re-run pipeline, verify only new rows land in
+ADLS</td>
+<td><strong>Project 1: Master Pipeline</strong> Create a master
+orchestration pipeline that calls full load (products, customers) +
+incremental load (orders) sequentially with dependency conditions</td>
+<td>7h</td>
+<td>✅ Full load pipeline ✅ Incremental load pipeline ✅ Master
+orchestration pipeline</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Master ADF pipeline running both loads
+end-to-end successfully</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="64">Tue May 19</span></strong></td>
+<td><strong>Project 1: Databricks Bronze→Silver</strong> Notebook 1:
+Read all CSVs from ADLS Bronze. Clean: handle nulls, fix data types,
+standardize dates, remove duplicates. Write to ADLS Silver as Delta
+tables</td>
+<td><strong>Project 1: Databricks Silver→Gold</strong> Notebook 2: Read
+Silver Delta tables. Join orders + customers + products. Aggregate:
+total revenue by month, by region, by product. Write to ADLS Gold as
+Delta</td>
+<td><strong>End-to-End Test #1</strong> Run ADF master pipeline →
+Databricks notebooks sequentially. Verify row counts match at Bronze,
+Silver, and Gold stages</td>
+<td>7h</td>
+<td>✅ Bronze→Silver notebook ✅ Silver→Gold notebook ✅ End-to-end test
+#1 passed</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> 2 clean Databricks notebooks with
+inline documentation</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="65">Wed May 20</span></strong></td>
+<td><strong>Project 1: Load to Synapse</strong> Write a Synapse
+pipeline: COPY INTO from ADLS Gold Delta → Synapse dedicated pool star
+schema tables. Verify data integrity and row counts</td>
+<td><strong>Project 1: Power BI Dashboard</strong> Connect Power BI
+Desktop to Synapse dedicated pool. Build 4-visual dashboard: Monthly
+Revenue Trend, Top 10 Products by Revenue, Revenue by Region, Order
+Volume by Month</td>
+<td><strong>Dashboard Polish</strong> Add slicers for date range and
+region. Add conditional formatting to KPIs. Export as <code>.pbix</code>
+file</td>
+<td>7h</td>
+<td>✅ Synapse dedicated pool loaded ✅ Power BI dashboard with 4
+visuals (.pbix file)</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Power BI .pbix dashboard with 4
+visuals committed to GitHub</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="66">Thu May 21</span></strong></td>
+<td><strong>Project 1: Pipeline Monitoring</strong> Set up Azure Monitor
+alerts: ADF pipeline failure (email), Synapse DWU usage exceeding 90%
+(email). Create a Log Analytics dashboard</td>
+<td><strong>Project 1: Testing &amp; Validation</strong> Run the full
+pipeline 3 times with different data batches (add rows between runs).
+Validate row counts at every stage match expectations</td>
+<td><strong>Project 1: Error Handling</strong> Add try/catch activity in
+ADF. Add error handling in Databricks notebooks. Test by intentionally
+introducing one malformed row — verify graceful failure</td>
+<td>7h</td>
+<td>✅ Monitoring alerts configured ✅ 3 validated pipeline runs ✅
+Error handling tested and working</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Azure Monitor alert rules live +
+validation test results documented</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="67">Fri May 22</span></strong></td>
+<td><strong>Project 1: GitHub Documentation</strong> Write comprehensive
+README: business problem statement, architecture overview, setup
+instructions, service descriptions, and results/insights</td>
+<td><strong>Project 1: Final Architecture Diagram</strong> Update
+draw.io diagram with all components, data flow directions, and service
+names. Export as PNG. Add to README</td>
+<td><strong>Project 1: Code Review</strong> Re-read all notebooks and
+ADF JSON files. Add markdown cells to notebooks. Add inline comments to
+Python. Remove all debug code</td>
+<td>7h</td>
+<td>✅ Comprehensive README ✅ Final architecture diagram ✅ Clean,
+commented code</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Portfolio Project 1 fully documented
+on GitHub — ready for recruiter review 🚀</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="68">Sat May 23</span></strong></td>
+<td><strong>DP-203 Practice: ADF + Databricks</strong> Go through MS
+Learn DP-203 modules for ADF and Databricks. Identify any exam-specific
+concepts you haven’t practiced yet</td>
+<td><strong>DP-203 Practice Questions</strong> Complete 30 practice
+questions specifically on ADF and Databricks topics from Udemy or
+Whizlabs</td>
+<td><strong>Correct &amp; Reinforce</strong> For every wrong answer:
+open the MS Learn module, re-read the relevant section, take a note</td>
+<td>6.5h</td>
+<td>✅ 30 practice questions done ✅ Gaps identified and addressed</td>
+<td>—</td>
+<td><strong>Checkpoint:</strong> Score ≥80% on ADF/Databricks practice
+questions</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="69">Sun May 24</span></strong></td>
+<td><strong>Rest &amp; Celebrate</strong> 🎉 Portfolio Project 1 is
+essentially done. That is a real accomplishment — take a genuine rest
+day</td>
+<td>—</td>
+<td>—</td>
+<td>Rest day</td>
+<td>✅ Recharged and proud</td>
+<td>—</td>
+<td><strong>🎉 Portfolio Project 1 effectively complete! Massive
+win!</strong></td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="week-11-phase-2-may-2531">📅 WEEK 11 | Phase 2 | <span class="auto-date" data-fmt="MMMM D" data-offset="70">May 25</span>–<span class="auto-date" data-fmt="D" data-offset="76">31</span></h2>
+<h3 id="weekly-focus-10">Weekly Focus</h3>
+<ul>
+<li>Complete all remaining DP-203 MS Learn modules</li>
+<li>Advanced Synapse patterns (RLS, materialized views, result-set
+caching)</li>
+<li>Delta Lake advanced features (OPTIMIZE, VACUUM, Z-ordering)</li>
+<li>DP-203 Practice Exam Set 1 (diagnostic — target 75%+)</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="70">Mon May 25</span></strong></td>
+<td><strong>MS Learn DP-203: Remaining LPs</strong> Work through any
+unfinished DP-203 learning paths. Focus on: pipeline monitoring,
+security basics, performance tuning modules</td>
+<td><strong>Udemy DP-203: Remaining Sections</strong> Alan Rodrigues —
+cover any topics not yet watched in the course</td>
+<td><strong>DP-203 GitHub Labs: Remaining</strong> Complete any official
+DP-203 labs not yet done. Prioritize ones covering topics you’re less
+confident in</td>
+<td>7h</td>
+<td>✅ All MS Learn DP-203 LPs done ✅ Remaining labs completed</td>
+<td><a href="https://github.com/MicrosoftLearning/DP-203T00-Data-Engineering-on-Microsoft-Azure" rel="noopener noreferrer" target="_blank">DP-203
+Labs GitHub</a></td>
+<td><strong>Checkpoint:</strong> 100% of official DP-203 MS Learn
+modules completed</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="71">Tue May 26</span></strong></td>
+<td><strong>Synapse: Advanced Patterns</strong> External tables,
+materialized views, result-set caching, workload management groups, and
+workload importance settings</td>
+<td><strong>Synapse: Row-Level Security</strong> Column-level security,
+row-level security (RLS), dynamic data masking. Implement RLS on a
+Synapse table — different users see different rows</td>
+<td><strong>Lab: Implement RLS</strong> Add RLS predicate to a Synapse
+table. Test with two different logins to verify each sees only their
+authorized rows</td>
+<td>7h</td>
+<td>✅ RLS implemented and verified ✅ Materialized view created</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> SQL script demonstrating RLS in
+Synapse dedicated pool (on GitHub)</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="72">Wed May 27</span></strong></td>
+<td><strong>Delta Lake: Advanced Features</strong> <code>OPTIMIZE</code>
+command, <code>VACUUM</code> (removing old files), Z-ordering for
+multi-dimensional clustering, schema enforcement vs schema
+evolution</td>
+<td><strong>Databricks: Unity Catalog (Concepts)</strong> Understand
+Unity Catalog for enterprise data governance — know the concept and
+purpose for the exam (full setup not required)</td>
+<td><strong>DP-203 Practice Exam Set 1</strong> 60 questions, strictly
+timed. This is a diagnostic — don’t be discouraged by a lower score</td>
+<td>7h</td>
+<td>✅ Delta Lake advanced features practiced ✅ Practice exam Set 1
+taken</td>
+<td>—</td>
+<td><strong>Checkpoint:</strong> Practice exam 1 — record score. Target
+75%+ (it’s a diagnostic)</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="73">Thu May 28</span></strong></td>
+<td><strong>Wrong Answer Deep Dive</strong> For every wrong answer: find
+the relevant MS Learn page, read it carefully, write a 2-sentence
+plain-English explanation</td>
+<td><strong>30 More Practice Questions</strong> From Udemy DP-203 test
+bank — focus on the topic areas you scored lowest in practice exam
+1</td>
+<td><strong>Build Your Weak Areas List</strong> Create a Notion or
+Markdown document listing your top 5 weak DP-203 topic areas with a mini
+study plan for each</td>
+<td>7h</td>
+<td>✅ Weak areas documented ✅ 30 additional practice questions
+done</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Written weak areas study plan
+document</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="74">Fri May 29</span></strong></td>
+<td><strong>Weak Area Study Sprint #1</strong> Pick your top 2 weak
+areas. Spend 2 hours on each: MS Learn reading + mini hands-on lab
+exercise</td>
+<td><strong>Weak Area Study Sprint #2</strong> Pick your next 2 weak
+areas. Build a Databricks notebook or ADF pipeline that demonstrates
+each concept hands-on</td>
+<td><strong>YouTube: Targeted Review</strong> Watch Adam Marczak or John
+Savill clips specifically covering your weak areas</td>
+<td>7h</td>
+<td>✅ Top 4 weak areas addressed with hands-on practice</td>
+<td>—</td>
+<td><strong>Checkpoint:</strong> Re-test on those 4 areas — aim for
+measurable score improvement</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="75">Sat May 30</span></strong></td>
+<td><strong>Azure Cost Management Review</strong> Check your Azure
+spending dashboard. Identify the top 3 most expensive resources. Pause
+any idle Synapse dedicated pools</td>
+<td><strong>DP-203: Networking Concepts</strong> Private endpoints,
+VNets, managed virtual networks in Synapse and ADF. Service endpoints vs
+private endpoints</td>
+<td><strong>Lab: Private Endpoint</strong> Add a private endpoint to
+your Storage Account. Understand the DNS configuration — this concept
+appears in the exam</td>
+<td>6h</td>
+<td>✅ Azure costs reviewed and controlled ✅ Private endpoint concepts
+understood</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Azure Cost Analysis screenshot saved —
+note monthly spend</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="76">Sun May 31</span></strong></td>
+<td><strong>Rest / Buffer Day</strong> Catch up or get slightly
+ahead</td>
+<td>—</td>
+<td>—</td>
+<td>3–4h</td>
+<td>Buffer</td>
+<td>—</td>
+<td>—</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="week-12-phase-2-june-17">📅 WEEK 12 | Phase 2 | <span class="auto-date" data-fmt="MMMM D" data-offset="77">June 1</span>–<span class="auto-date" data-fmt="D" data-offset="83">7</span></h2>
+<h3 id="weekly-focus-11">Weekly Focus</h3>
+<ul>
+<li>Advanced ADF patterns (REST API, metadata-driven,
+ForEach/Lookup)</li>
+<li>Databricks Structured Streaming (Spark Streaming → Delta Lake)</li>
+<li>KQL basics for Log Analytics</li>
+<li>DP-203 Practice Exam Set 2 (target 80%+)</li>
+<li>Portfolio Project 1: final polish + LinkedIn post</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="77">Mon Jun 1</span></strong></td>
+<td><strong>ADF: REST API Connector</strong> Copy data from a public
+REST API (e.g., JSONPlaceholder) to ADLS using ADF’s HTTP connector with
+pagination handling</td>
+<td><strong>ADF: Metadata-Driven Pipeline</strong> Build a pipeline that
+reads a config table (list of source tables) and uses ForEach + Lookup
+activity to process all sources dynamically</td>
+<td><strong>Udemy DP-203: Advanced ADF</strong> Alan Rodrigues —
+advanced ADF patterns section</td>
+<td>7h</td>
+<td>✅ REST API pipeline working ✅ Metadata-driven ForEach pipeline
+processing 3+ sources</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Metadata-driven ADF pipeline — add a
+new source by editing the config table only</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="78">Tue Jun 2</span></strong></td>
+<td><strong>Databricks: MLflow Basics (Exam Level)</strong> Understand
+MLflow experiments, runs, and model registry at a conceptual level. Know
+it exists and its purpose — not deep ML</td>
+<td><strong>Databricks: Structured Streaming</strong> Read from Event
+Hubs as a streaming source with Spark Structured Streaming. Write to a
+Delta Lake sink with <code>.writeStream</code></td>
+<td><strong>Lab: Structured Streaming → Delta</strong> Run the streaming
+pipeline for 10 minutes. Query the Delta table. Verify micro-batch
+records are arriving</td>
+<td>7h</td>
+<td>✅ Structured Streaming pipeline running ✅ Delta Lake sink
+receiving data</td>
+<td><a href="https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html" rel="noopener noreferrer" target="_blank">Spark
+Structured Streaming guide</a></td>
+<td><strong>Deliverable:</strong> Structured Streaming notebook writing
+to Delta Lake Silver table</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="79">Wed Jun 3</span></strong></td>
+<td><strong>DP-203: Full Topic Self-Assessment</strong> Go through the
+complete DP-203 exam skills outline. Rate yourself honestly 1–5 on each
+topic</td>
+<td><strong>DP-203 Practice Exam Set 2</strong> 60 questions, timed 150
+minutes</td>
+<td><strong>Analyze by Category</strong> Which topic categories are
+below 75%? Build a targeted study plan for the remaining weeks</td>
+<td>7h</td>
+<td>✅ Self-assessment complete ✅ Practice exam 2 ≥80%</td>
+<td>—</td>
+<td><strong>Checkpoint:</strong> Target 80%+ on practice exam 2</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="80">Thu Jun 4</span></strong></td>
+<td><strong>Weak Area Sprint: Session 1</strong> Deep dive on your
+lowest-scoring DP-203 topic. MS Learn + hands-on lab</td>
+<td><strong>Weak Area Sprint: Session 2</strong> Deep dive on your
+second-lowest topic. Build something hands-on to reinforce</td>
+<td><strong>DP-203: Exam Strategy Session</strong> Read about DP-203
+question formats, scenario-based questions, and elimination strategies.
+Practice flagging and reviewing</td>
+<td>7h</td>
+<td>✅ 2 more weak areas addressed</td>
+<td>—</td>
+<td>—</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="81">Fri Jun 5</span></strong></td>
+<td><strong>Azure Monitor: KQL for Data Engineers</strong> MS Learn
+monitoring module. Write 5 KQL queries on your Log Analytics workspace:
+failed pipeline runs by day, average run duration, top errors by
+type</td>
+<td><strong>KQL Practice</strong> Add 5 more KQL queries: events per
+hour, data volume trend, anomaly detection alert history</td>
+<td><strong>DP-203: Performance Tuning Questions</strong> 20 practice
+questions specifically on performance optimization topics (Spark,
+Synapse, ADLS)</td>
+<td>7h</td>
+<td>✅ 10 KQL queries written ✅ 20 performance questions done</td>
+<td><a href="https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/" rel="noopener noreferrer" target="_blank">KQL
+docs</a></td>
+<td><strong>Deliverable:</strong> KQL query library (10 queries)
+committed to GitHub</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="82">Sat Jun 6</span></strong></td>
+<td><strong>Portfolio Project 1: Final Polish</strong> Complete review
+of the entire project. Verify every link in the README works. Add any
+missing screenshots, output samples</td>
+<td><strong>LinkedIn: Project 1 Post</strong> Write and publish a
+LinkedIn post about your Sales Analytics Pipeline: include the
+architecture diagram, tech stack list, and 2 key technical
+learnings</td>
+<td><strong>Portfolio Hub (Optional)</strong> Create a Notion page or
+GitHub profile README as your personal portfolio hub linking to all
+projects</td>
+<td>6h</td>
+<td>✅ Project 1 polished and complete ✅ LinkedIn post published</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> LinkedIn post about Project 1
+published and getting engagement</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="83">Sun Jun 7</span></strong></td>
+<td><strong>Rest / Buffer Day</strong></td>
+<td>—</td>
+<td>—</td>
+<td>3–4h</td>
+<td>Buffer</td>
+<td>—</td>
+<td>—</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="week-13-phase-2-june-814">📅 WEEK 13 | Phase 2 | <span class="auto-date" data-fmt="MMMM D" data-offset="84">June 8</span>–<span class="auto-date" data-fmt="D" data-offset="90">14</span></h2>
+<h3 id="weekly-focus-12">Weekly Focus</h3>
+<ul>
+<li>Final Phase 2 consolidation and review</li>
+<li>DP-203 Practice Exam Set 3 (target 85%+)</li>
+<li>Build DP-203 decision framework one-pager</li>
+<li>Research the job market and identify skill gaps</li>
+<li>Prepare for Phase 3</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="84">Mon Jun 8</span></strong></td>
+<td><strong>DP-203 Practice Exam Set 3</strong> Full 60-question exam,
+strictly timed</td>
+<td><strong>Analysis: Categorize Results</strong> Break down your score
+by topic category. Build your final weak areas list for targeted prep in
+Phase 4</td>
+<td><strong>Study Sprint: Top 2 Weak Areas</strong> Address your top 2
+weak areas immediately with MS Learn + hands-on lab</td>
+<td>7h</td>
+<td>✅ Practice exam 3 ≥85% ✅ Weak areas categorized</td>
+<td>—</td>
+<td><strong>Checkpoint:</strong> Target ≥85% on practice exam 3</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="85">Tue Jun 9</span></strong></td>
+<td><strong>Phase 2 Full Review: ADF</strong> Review all ADF concepts
+systematically: pipeline types, activities, triggers, integration
+runtime options, data flows, monitoring, best practices</td>
+<td><strong>Phase 2 Full Review: Databricks</strong> Review Spark
+architecture, DataFrame operations, Delta Lake, optimization techniques,
+job scheduling, and ADF integration</td>
+<td><strong>Phase 2 Full Review: Synapse</strong> Review dedicated pool
+distributions, loading patterns, serverless SQL, Spark pool, star schema
+design, and performance tuning</td>
+<td>7h</td>
+<td>✅ Complete Phase 2 review done</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> 3-page Phase 2 cheat sheet (ADF +
+Databricks + Synapse) committed to GitHub</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="86">Wed Jun 10</span></strong></td>
+<td><strong>DP-203: Scenario-Based Questions</strong> 20 scenario-based
+questions — given a business requirement, pick the right architecture.
+This is the hardest question type on the exam</td>
+<td><strong>Design Scenarios Practice</strong> For 5 written scenarios,
+write out which Azure service you’d use and your full reasoning.
+Practice articulating your architecture decisions</td>
+<td><strong>DP-203 Decision Framework</strong> Create a 1-page decision
+framework: “When to use X vs Y” for all major service pairs. This will
+be invaluable in interviews too</td>
+<td>7h</td>
+<td>✅ Scenario questions practiced ✅ Decision framework document
+built</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> DP-203 service decision framework
+one-pager (PDF/Markdown) on GitHub</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="87">Thu Jun 11</span></strong></td>
+<td><strong>Phase 3 Preview</strong> Read through Phase 3 topics
+carefully: security, Key Vault, RBAC, performance tuning, CI/CD, data
+quality. Build a reading list</td>
+<td><strong>Azure Security: Preview</strong> MS Learn — Azure security
+fundamentals. RBAC concepts, role assignments, and scope levels</td>
+<td><strong>Job Market Research</strong> Search “Azure Data Engineer” on
+LinkedIn Jobs. Read 10 job descriptions carefully. Note any skills
+mentioned that you haven’t practiced yet</td>
+<td>7h</td>
+<td>✅ Phase 3 reading list ready ✅ Security concepts previewed ✅ Job
+market gap analysis done</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Job description analysis: list of
+skills mentioned and your current proficiency</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="88">Fri Jun 12</span></strong></td>
+<td><strong>Final Phase 2 Lab Sweep</strong> Complete any remaining
+DP-203 GitHub labs that are still pending. Do not move to Phase 3 with
+any official labs incomplete</td>
+<td><strong>Azure Resource Cleanup</strong> Review all Azure resources.
+Delete unused items. Pause all dedicated pools and clusters. Check your
+costs for the month</td>
+<td><strong>Code Quality Review</strong> Re-read all notebooks and
+pipelines from Phase 2. Clean comments, rename vague variables, remove
+debug output. Polish everything</td>
+<td>7h</td>
+<td>✅ All official labs done ✅ Azure costs checked ✅ All code clean
+and professional</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Clean Phase 2 portfolio with every
+file professional-quality</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="89">Sat Jun 13</span></strong></td>
+<td><strong>Phase 2 Summary Document</strong> Write a 1-page summary of
+Phase 2: technologies mastered, projects built, challenges you overcame,
+and the most important things you learned</td>
+<td><strong>LinkedIn Update</strong> Add Phase 2 skills to LinkedIn
+profile: Azure Data Factory, Azure Databricks, PySpark, Delta Lake,
+Azure Synapse Analytics, Power BI</td>
+<td><strong>Phase 2 Wrap-up</strong> Review your entire GitHub
+portfolio. Ensure both projects look professional and are public</td>
+<td>6.5h</td>
+<td>✅ Phase 2 summary written ✅ LinkedIn updated ✅ Portfolio public
+and polished</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Updated LinkedIn profile with all
+Phase 2 skills and Project 1</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="90">Sun Jun 14</span></strong></td>
+<td><strong>Rest &amp; Celebrate</strong> 🎉 Phase 2 is done. This is
+the hardest phase. You’ve built production-grade data engineering
+skills. Take a real rest day</td>
+<td>—</td>
+<td>—</td>
+<td>Rest day</td>
+<td>✅ Recharged and confident</td>
+<td>—</td>
+<td><strong>🎉 Phase 2 COMPLETE — Sales Analytics Pipeline done, DP-203
+knowledge solid!</strong></td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<blockquote>
+<p>🎉 <strong>Phase 2 Milestone:</strong> You’ve built a full end-to-end
+Sales Analytics Pipeline using ADF, Databricks, Synapse, ADLS Gen2, and
+Power BI. This is exactly what Azure Data Engineer job postings ask for.
+You’re genuinely interview-capable at this point — what comes next makes
+you exceptional!</p>
+</blockquote>
+<hr/>
+<h1 id="phase-3-advanced-production-skills-weeks-1416">🟧 PHASE 3:
+Advanced &amp; Production Skills (Weeks 14–16)</h1>
+<p><strong>Dates:</strong> <span class="auto-date" data-fmt="MMMM D" data-offset="91">June 15</span> – <span class="auto-date" data-fmt="MMMM D" data-offset="111">July 5</span>, 2026</p>
+<p><strong>Phase 3 Goals:</strong> - Security: RBAC, Managed Identities,
+Azure Key Vault, Private Endpoints - Performance tuning: Spark
+optimization, file sizing, Synapse statistics - CI/CD: GitHub Actions +
+Azure DevOps for ADF and Databricks deployments - Data quality: Great
+Expectations validation in pipelines - Build Portfolio Project 2:
+Real-Time IoT Data Pipeline with Monitoring &amp; Alerting</p>
+<hr/>
+<h2 id="week-14-phase-3-june-1521">📅 WEEK 14 | Phase 3 | June
+15–21</h2>
+<h3 id="weekly-focus-13">Weekly Focus</h3>
+<ul>
+<li>Azure Security deep dive: RBAC, Managed Identities, Key Vault</li>
+<li>Remove all hardcoded credentials from your pipelines</li>
+<li>Private endpoints and VNet security</li>
+<li>Performance tuning: Spark, ADLS, Synapse</li>
+<li>Begin Portfolio Project 2 architecture and IoT simulator</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="91">Mon Jun 15</span></strong></td>
+<td><strong>Azure RBAC Deep Dive</strong> MS Learn — role definitions,
+role assignments, scope levels (management group/subscription/resource
+group/resource). Built-in roles vs custom roles</td>
+<td><strong>RBAC Lab</strong> Create a custom role with limited
+read-only permissions. Assign it to a service principal. Test that the
+SP can only perform what the role allows — no more</td>
+<td><strong>Managed Identities</strong> System-assigned vs user-assigned
+managed identities. Configure ADF to use a system-assigned managed
+identity to access ADLS — no storage keys needed</td>
+<td>7h</td>
+<td>✅ Custom RBAC role created ✅ Managed identity on ADF
+configured</td>
+<td><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/" rel="noopener noreferrer" target="_blank">MS
+Learn RBAC</a></td>
+<td><strong>Deliverable:</strong> ADF using managed identity to access
+ADLS — zero storage keys in linked service</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="92">Tue Jun 16</span></strong></td>
+<td><strong>Azure Key Vault</strong> Create a Key Vault. Store 3
+secrets: DB connection string, storage account key, API key. Access
+secrets from ADF via Key Vault reference in linked services</td>
+<td><strong>Key Vault Lab: Secure All ADF</strong> Update ALL your ADF
+linked services to reference Key Vault secrets instead of hardcoded
+credentials. This is a mandatory best practice</td>
+<td><strong>Key Vault in Databricks</strong> Create a Databricks secrets
+scope backed by Azure Key Vault. Reference secrets in notebooks using
+<code>dbutils.secrets.get()</code> — no plaintext credentials</td>
+<td>7h</td>
+<td>✅ Key Vault with 3 secrets ✅ All ADF linked services using Key
+Vault ✅ Databricks secrets scope configured</td>
+<td><a href="https://learn.microsoft.com/en-us/azure/key-vault/" rel="noopener noreferrer" target="_blank">Key
+Vault docs</a></td>
+<td><strong>Deliverable:</strong> Zero hardcoded credentials anywhere in
+your entire pipeline</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="93">Wed Jun 17</span></strong></td>
+<td><strong>Network Security: Private Endpoints</strong> VNets, NSGs,
+private endpoints vs service endpoints. Why private endpoints are
+required in enterprise Azure environments</td>
+<td><strong>Private Endpoint Lab</strong> Create a private endpoint for
+your ADLS account. Configure DNS zone. Verify data flows correctly
+through the private network</td>
+<td><strong>Synapse Managed VNet</strong> Understand Synapse Analytics
+managed virtual network and managed private endpoints for connecting to
+external data sources securely</td>
+<td>7h</td>
+<td>✅ Private endpoint on ADLS working ✅ Network security architecture
+understood</td>
+<td><a href="https://learn.microsoft.com/en-us/azure/private-link/" rel="noopener noreferrer" target="_blank">Private
+Link docs</a></td>
+<td><strong>Deliverable:</strong> Private endpoint on ADLS documented
+with architecture diagram</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="94">Thu Jun 18</span></strong></td>
+<td><strong>Performance Tuning: PySpark</strong> Revisit Adaptive Query
+Execution (AQE), broadcast joins for small tables, partition skew
+detection and remediation, caching strategies. Profile a slow
+notebook</td>
+<td><strong>Performance Tuning: ADLS</strong> Optimal file sizes for
+Parquet (128MB–1GB per file). Partitioning strategies for read
+performance. Z-ordering in Delta Lake for multi-column filtering</td>
+<td><strong>Performance Tuning: Synapse</strong> Proper statistics
+(<code>CREATE STATISTICS</code>), result-set caching, workload
+management classification, materialized views for common
+aggregations</td>
+<td>7h</td>
+<td>✅ Slow Spark notebook optimized ✅ File sizes and partitioning
+reviewed ✅ Synapse statistics added</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Before/after performance documentation
+with actual query times (Markdown file)</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="95">Fri Jun 19</span></strong></td>
+<td><strong>Azure Monitor: Advanced Configuration</strong> Configure
+diagnostic settings for ADF, Databricks, Synapse, and ADLS → all
+streaming to one Log Analytics workspace</td>
+<td><strong>KQL: Monitoring Queries</strong> Write 10 production-quality
+KQL queries: failed pipeline runs by hour, average pipeline duration by
+name, data volume trend, top 5 error messages</td>
+<td><strong>Azure Cost Management</strong> Use Azure Cost Analysis to
+identify your top 3 spending resources. Understand reserved instances vs
+pay-as-you-go pricing impact</td>
+<td>7h</td>
+<td>✅ All service diagnostics → Log Analytics ✅ 10 production KQL
+queries ✅ Cost optimization identified</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Log Analytics workbook with 5
+monitoring KPI tiles</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="96">Sat Jun 20</span></strong></td>
+<td><strong>Project 2: Architecture Design</strong> Design the complete
+Real-Time IoT Pipeline in draw.io: IoT Simulator (Python) → Event Hubs →
+Stream Analytics → ADLS → Databricks Structured Streaming → Synapse →
+Azure Monitor + Alerts</td>
+<td><strong>Project 2: GitHub Setup</strong> Create repo
+<code>azure-iot-realtime-pipeline</code>. Write README outline with
+sections: overview, architecture, setup, services, results</td>
+<td><strong>Project 2: IoT Simulator</strong> Write Python script
+simulating 5 IoT sensors sending temperature, pressure, and humidity
+readings every 5 seconds to Event Hubs</td>
+<td>6.5h</td>
+<td>✅ Project 2 architecture diagram ✅ GitHub repo created ✅ IoT
+simulator sending events</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Architecture diagram + working Python
+IoT simulator script committed to GitHub</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="97">Sun Jun 21</span></strong></td>
+<td><strong>Rest / Buffer Day</strong> Review week’s security topics.
+Update your security cheat sheet</td>
+<td>—</td>
+<td>—</td>
+<td>3–4h</td>
+<td>Buffer</td>
+<td>—</td>
+<td>—</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="week-15-phase-3-june-2228">📅 WEEK 15 | Phase 3 | June
+22–28</h2>
+<h3 id="weekly-focus-14">Weekly Focus</h3>
+<ul>
+<li>CI/CD: ADF Git integration, GitHub Actions deployment workflow</li>
+<li>Azure DevOps: pipelines for Databricks notebook deployment</li>
+<li>Data quality: Great Expectations framework</li>
+<li>Build Portfolio Project 2: Stream Analytics + Databricks streaming
+layers</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="98">Mon Jun 22</span></strong></td>
+<td><strong>CI/CD Concepts for Data Engineering</strong> What is CI/CD?
+Why it matters. Development environments (dev/test/prod). ADF
+collaboration mode: Git-backed ADF vs live mode</td>
+<td><strong>ADF Git Integration</strong> Connect your ADF instance to a
+GitHub repository. Understand feature branches, pull requests, publish
+to ARM template, and deployment process</td>
+<td><strong>GitHub Actions: Introduction</strong> Create a simple GitHub
+Actions workflow triggered on push. Understand YAML syntax: triggers,
+jobs, steps, environment variables, and secrets</td>
+<td>7h</td>
+<td>✅ ADF connected to GitHub ✅ First GitHub Actions workflow
+running</td>
+<td><a href="https://learn.microsoft.com/en-us/azure/data-factory/source-control" rel="noopener noreferrer" target="_blank">ADF
+Git integration docs</a></td>
+<td><strong>Deliverable:</strong> ADF backed by GitHub with ARM template
+exported on every publish</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="99">Tue Jun 23</span></strong></td>
+<td><strong>GitHub Actions: Deploy ADF</strong> Create a workflow that
+deploys ADF ARM template to a “production” resource group automatically
+on merge to the main branch</td>
+<td><strong>ARM Templates: Basics</strong> Understand ARM template
+structure (parameters, variables, resources, outputs). Export a template
+from the Azure portal. Make an edit and redeploy</td>
+<td><strong>Bicep: Brief Introduction</strong> Understand Bicep as a
+more readable alternative to ARM JSON. Convert a small ARM template to
+Bicep. Know this exists for the exam</td>
+<td>7h</td>
+<td>✅ GitHub Actions deploying ADF to prod ✅ ARM template redeployed
+successfully</td>
+<td><a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/" rel="noopener noreferrer" target="_blank">ARM
+Templates docs</a></td>
+<td><strong>Deliverable:</strong> GitHub Actions workflow deploying ADF
+on every merge to main</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="100">Wed Jun 24</span></strong></td>
+<td><strong>Azure DevOps: Overview &amp; Setup</strong> Create an Azure
+DevOps organization and project. Understand: Boards, Repos, Pipelines,
+Artifacts, and Test Plans</td>
+<td><strong>Azure DevOps: YAML Pipeline</strong> Create an Azure DevOps
+pipeline that deploys your Databricks notebooks to a Databricks
+workspace automatically on commit</td>
+<td><strong>Azure DevOps: Release Pipeline</strong> Set up a multi-stage
+release pipeline (DEV → PROD) with a manual approval gate between
+stages</td>
+<td>7h</td>
+<td>✅ Azure DevOps pipeline deploying Databricks ✅ Release pipeline
+with approval gate</td>
+<td><a href="https://learn.microsoft.com/en-us/azure/devops/" rel="noopener noreferrer" target="_blank">Azure
+DevOps docs</a></td>
+<td><strong>Deliverable:</strong> Azure DevOps multi-stage pipeline with
+DEV→PROD deployment</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="101">Thu Jun 25</span></strong></td>
+<td><strong>Data Quality: Great Expectations</strong> Install Great
+Expectations. Create an Expectation Suite for your orders data. Define 5
+expectations: not-null, value range, uniqueness, type checks</td>
+<td><strong>Great Expectations Lab</strong> Intentionally introduce 3
+bad rows into your dataset. Run GE validation. Verify the HTML report
+catches all 3 failures. Fix them and rerun</td>
+<td><strong>Data Quality in Databricks</strong> Implement data quality
+checks as a dedicated notebook step: schema validation, null counts,
+range checks. Run before writing to Silver</td>
+<td>7h</td>
+<td>✅ GE Expectation Suite with 5 checks ✅ Validation catching errors
+correctly ✅ DQ notebook step in pipeline</td>
+<td><a href="https://docs.greatexpectations.io/" rel="noopener noreferrer" target="_blank">Great Expectations
+docs</a></td>
+<td><strong>Deliverable:</strong> Great Expectations validation
+integrated into your ETL pipeline</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="102">Fri Jun 26</span></strong></td>
+<td><strong>Project 2: Stream Analytics Layer</strong> Create Stream
+Analytics job: Event Hubs input → 5-min tumbling window aggregations →
+dual output (ADLS + anomaly detection). Wire in AnomalyDetection
+function</td>
+<td><strong>Project 2: Databricks Structured Streaming</strong>
+Databricks notebook: read from Event Hubs → complex transformations
+(device grouping, rolling stats) → write to Delta Lake Silver</td>
+<td><strong>Project 2: Synapse Load</strong> Load aggregated Delta data
+from Databricks into Synapse dedicated pool for analytics. Set up
+incremental load from Delta to Synapse</td>
+<td>7h</td>
+<td>✅ Stream Analytics running with anomaly detection ✅ Databricks
+Structured Streaming writing Delta ✅ Synapse loaded</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Live data flowing from Event Hubs
+through all 4 layers to Synapse</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="103">Sat Jun 27</span></strong></td>
+<td><strong>Project 2: Monitoring &amp; Alerting</strong> Configure: ADF
+pipeline failure alert, Event Hubs consumer lag alert, Databricks job
+failure alert, Synapse DWU threshold alert. All via Azure Monitor</td>
+<td><strong>Project 2: Log Analytics Dashboard</strong> Build a Log
+Analytics workbook with 5 KPIs: events/minute, processing lag (seconds),
+failed jobs today, data volume (MB), anomaly count</td>
+<td><strong>Project 2: End-to-End Test</strong> Run the full pipeline
+for 30 minutes. Introduce 3 artificial anomalies (spike the temperature
+to 999°). Verify alerts fire correctly</td>
+<td>7h</td>
+<td>✅ 4 monitor alerts configured ✅ Log Analytics workbook with 5 KPIs
+✅ Anomaly alerts firing</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Azure Monitor workbook showing
+real-time pipeline health KPIs</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="104">Sun Jun 28</span></strong></td>
+<td><strong>Rest / Buffer Day</strong></td>
+<td>—</td>
+<td>—</td>
+<td>3–4h</td>
+<td>Buffer</td>
+<td>—</td>
+<td>—</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="week-16-phase-3-june-29-july-5">📅 WEEK 16 | Phase 3 | <span class="auto-date" data-fmt="MMMM D" data-offset="105">June 29</span> –
+<span class="auto-date" data-fmt="MMMM D" data-offset="111">July 5</span></h2>
+<h3 id="weekly-focus-15">Weekly Focus</h3>
+<ul>
+<li>Complete and fully document Portfolio Project 2</li>
+<li>Phase 3 review for interview preparation</li>
+<li>Begin DP-203 intensive exam prep (Practice Exam Set 4)</li>
+<li>Security + CI/CD interview Q&amp;A preparation</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="105">Mon Jun 29</span></strong></td>
+<td><strong>Project 2: Final Architecture Diagram</strong> Complete the
+draw.io diagram showing all components, data flows, security boundaries
+(Key Vault, private endpoints), and monitoring integration</td>
+<td><strong>Project 2: GitHub Documentation</strong> Comprehensive
+README: business problem (real-time IoT monitoring), architecture, Azure
+services used, deployment instructions, results, and key learnings</td>
+<td><strong>Project 2: Code Cleanup</strong> Docstrings on all Python
+scripts. Markdown cells in all Databricks notebooks. Inline comments in
+ADF JSON. Remove all debug output</td>
+<td>7h</td>
+<td>✅ Final architecture diagram ✅ Comprehensive README ✅ Clean,
+documented code</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Portfolio Project 2 fully documented
+on GitHub — recruiter-ready</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="107">Tue Jul 1</span></strong></td>
+<td><strong>Project 2: Demo Video (Optional but Impactful)</strong>
+Record a 3–5 minute screen recording showing: the IoT simulator sending
+data, the live Power BI dashboard updating, and an alert firing</td>
+<td><strong>LinkedIn Post: Project 2</strong> Write and publish a
+LinkedIn post about your real-time IoT pipeline. Include architecture
+diagram, tech stack, and 1–2 technical challenges you solved</td>
+<td><strong>Blog Post Draft</strong> Outline a technical article:
+“Building a Real-Time IoT Data Pipeline on Azure” for Medium or Dev.to.
+Save the draft for later</td>
+<td>6.5h</td>
+<td>✅ Demo video recorded ✅ LinkedIn post published</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> LinkedIn post about Project 2 live
+with architecture diagram</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="108">Wed Jul 2</span></strong></td>
+<td><strong>Phase 3 Review: Security</strong> Quiz yourself without
+notes: when to use managed identity vs service principal, how RBAC scope
+works, how Key Vault integration works in ADF and Databricks</td>
+<td><strong>Phase 3 Review: CI/CD</strong> Walk through your GitHub
+Actions workflow step by step. Can you explain every line? Explain the
+ADF Git integration and deployment process</td>
+<td><strong>Phase 3 Review: Performance</strong> Recall your
+before/after performance numbers. Know the optimization techniques and
+when to apply each: broadcast join, Z-ordering, OPTIMIZE, caching</td>
+<td>7h</td>
+<td>✅ Phase 3 fully reviewed and internalized</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Phase 3 interview prep notes (security
++ CI/CD + performance)</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="109">Thu Jul 3</span></strong></td>
+<td><strong>DP-203 Intensive: Exam Blueprint</strong> Download the
+official DP-203 exam skills outline PDF. Map every skill item to a
+specific MS Learn module AND a specific lab or project you built</td>
+<td><strong>DP-203 Practice Exam Set 4</strong> Full 60-question exam,
+strictly timed. Focus on Phase 3 topics: security, monitoring,
+performance, CI/CD</td>
+<td><strong>Gap Analysis</strong> Which Phase 3 topics are below 85% on
+the exam? These get targeted sprint time in Phase 4</td>
+<td>7h</td>
+<td>✅ Skills mapped to labs ✅ Practice exam 4 ≥85%</td>
+<td><a href="https://learn.microsoft.com/en-us/certifications/exams/dp-203" rel="noopener noreferrer" target="_blank">DP-203
+skills outline</a></td>
+<td><strong>Checkpoint:</strong> Practice exam 4 ≥85%</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="110">Fri Jul 4</span></strong></td>
+<td><strong>Weak Areas from Practice Exam 4</strong> Deep dive sprint on
+any sub-85% areas from yesterday’s exam. MS Learn + targeted mini
+lab</td>
+<td><strong>MS Learn: Final Sweep</strong> Confirm every single MS Learn
+DP-203 module has been completed and knowledge checks passed</td>
+<td><strong>DP-203 GitHub Labs: Final Sweep</strong> Make absolutely
+sure every official lab from the GitHub repo is done and working</td>
+<td>7h</td>
+<td>✅ All weak areas from exam 4 addressed ✅ All MS Learn modules 100%
+complete ✅ All official labs done</td>
+<td>—</td>
+<td><strong>Checkpoint:</strong> 100% of all official labs and MS Learn
+modules confirmed complete</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="111">Sat Jul 5</span></strong></td>
+<td><strong>Phase 3 Comprehensive Cheat Sheet</strong> Build a Phase 3
+cheat sheet: security services and when to use them, CI/CD commands and
+workflow, performance optimization tips, key KQL patterns</td>
+<td><strong>Portfolio Complete Inventory</strong> List everything: 2
+GitHub projects, architecture diagrams, LinkedIn posts, Power BI
+dashboard, blog post draft. Everything a recruiter would find</td>
+<td><strong>Interview Q&amp;A: Phase 3 Topics</strong> Write 10
+interview Q&amp;A based on Phase 3 topics. Speak each answer aloud —
+timing yourself. Target 2 minutes per answer</td>
+<td>6.5h</td>
+<td>✅ Phase 3 cheat sheet ✅ Complete portfolio inventory ✅ 10
+interview Q&amp;As written and practiced</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Phase 3 interview Q&amp;A document
+committed to GitHub/Notion</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="111">Sun Jul 5</span></strong></td>
+<td><strong>Rest &amp; Celebrate</strong> 🎉 Phase 3 complete. Two
+production-grade portfolio projects are live. You have real security,
+CI/CD, and monitoring skills. Take a genuine rest day</td>
+<td>—</td>
+<td>—</td>
+<td>Rest day</td>
+<td>✅ Well deserved rest</td>
+<td>—</td>
+<td><strong>🎉 Phase 3 COMPLETE — 2 portfolio projects live,
+production-grade skills mastered!</strong></td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<blockquote>
+<p>🎉 <strong>Phase 3 Milestone:</strong> You’ve secured pipelines,
+built CI/CD automation, handled real-time streaming, and implemented
+enterprise monitoring. Two impressive portfolio projects exist. You’re
+not just job-ready — you’re interview-ready. Phase 4 seals it all!</p>
+</blockquote>
+<hr/>
+<h1 id="phase-4-certification-portfolio-polish-weeks-1719">🟥 PHASE 4:
+Certification &amp; Portfolio Polish (Weeks 17–19)</h1>
+<p><strong>Dates:</strong> <span class="auto-date" data-fmt="MMMM D" data-offset="112">July 6</span> – <span class="auto-date" data-fmt="MMMM D" data-offset="132">July 26</span>, 2026</p>
+<p><strong>Phase 4 Goals:</strong> - Intensive DP-203 exam preparation
+(daily practice exams) - Pass the DP-203 exam 🎯 - Polish LinkedIn,
+GitHub portfolio, and resume to professional standard - Write and
+publish a technical blog post - Begin job applications (target: 15+ by
+end of Week 19)</p>
+<hr/>
+<h2 id="week-17-phase-4-july-612">📅 WEEK 17 | Phase 4 | <span class="auto-date" data-fmt="MMMM D" data-offset="112">July 6</span>–<span class="auto-date" data-fmt="D" data-offset="118">12</span></h2>
+<h3 id="weekly-focus-16">Weekly Focus</h3>
+<ul>
+<li>DP-203 intensive: complete topic review mapped to exam skills
+outline</li>
+<li>Daily timed practice exams (60 questions each)</li>
+<li>Identify and close any remaining knowledge gaps</li>
+<li>Resume draft + GitHub final polish</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="112">Mon Jul 6</span></strong></td>
+<td><strong>DP-203: Complete Skills Inventory</strong> Review every item
+in the official exam skills outline. Mark each as: Strong / Needs Review
+/ Weak. Be brutally honest</td>
+<td><strong>Study Sprint: Top 2 Weak Topics</strong> Spend 3 focused
+hours on your top 2 weakest areas. MS Learn + targeted hands-on lab</td>
+<td><strong>Practice Exam Set 5</strong> 60 questions, strictly timed.
+No notes</td>
+<td>7h</td>
+<td>✅ Skills inventory complete ✅ Weak areas studied ✅ Practice exam
+5 done</td>
+<td>—</td>
+<td><strong>Checkpoint:</strong> Target ≥85% on practice exam 5</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="113">Tue Jul 7</span></strong></td>
+<td><strong>DP-203: ADF + Synapse Deep Review</strong> Systematically
+review every ADF and Synapse exam topic. Re-do any labs where you still
+feel uncertain</td>
+<td><strong>DP-203: Databricks + Delta Lake Review</strong> Review
+PySpark exam concepts, Delta Lake operations, optimization. Redo
+specific labs on any gaps</td>
+<td><strong>Practice Exam Set 6</strong> 60 questions, timed</td>
+<td>7h</td>
+<td>✅ ADF/Synapse fully reviewed ✅ Practice exam 6 done</td>
+<td>—</td>
+<td><strong>Checkpoint:</strong> Target ≥88% on practice exam 6</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="114">Wed Jul 8</span></strong></td>
+<td><strong>DP-203: Streaming Review</strong> Event Hubs, Stream
+Analytics, windowing, late-arriving data, Structured Streaming. Key
+points that appear in exam questions</td>
+<td><strong>DP-203: Security + Monitoring Review</strong> RBAC, managed
+identity, Key Vault, private endpoints, Azure Monitor, Log Analytics.
+Exam-focused — know the decision points</td>
+<td><strong>Practice Exam Set 7</strong> 60 questions, timed</td>
+<td>7h</td>
+<td>✅ Streaming reviewed ✅ Security reviewed ✅ Practice exam 7
+done</td>
+<td>—</td>
+<td><strong>Checkpoint:</strong> Target ≥90% on practice exam 7</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="115">Thu Jul 9</span></strong></td>
+<td><strong>Scenario Questions Practice</strong> 30 architecture
+scenario questions — “given this business requirement, which solution?”
+These are the hardest on the exam. Practice elimination method</td>
+<td><strong>TutorialsDojo or MeasureUp</strong> Use TutorialsDojo DP-203
+tests for fresh questions from a different question bank</td>
+<td><strong>Schedule DP-203 Exam</strong> Go to Microsoft Certification
+portal. Schedule DP-203 for <span class="auto-date" data-fmt="MMMM D" data-offset="127">July 21</span>–<span class="auto-date" data-fmt="D" data-offset="129">23</span>. Complete the Exam Sandbox to
+know exactly what to expect</td>
+<td>7h</td>
+<td>✅ Scenario questions ≥85% ✅ Exam scheduled and confirmed</td>
+<td><a href="https://tutorialsdojo.com/" rel="noopener noreferrer" target="_blank">TutorialsDojo</a> · <a href="https://www.measureup.com/" rel="noopener noreferrer" target="_blank">MeasureUp</a></td>
+<td><strong>Checkpoint:</strong> DP-203 exam booked with a confirmed
+date</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="116">Fri Jul 10</span></strong></td>
+<td><strong>Full-Length Mock Exam #1 (Simulation)</strong> 60 questions.
+150-minute strict timer. No notes. No looking things up. Exact exam
+conditions</td>
+<td><strong>Mock Exam Full Review</strong> Review EVERY single answer —
+not just wrong ones. For right answers, confirm you understand WHY
+they’re correct</td>
+<td><strong>Final Gap List</strong> Create your very last gap list. Only
+the truly remaining weak spots</td>
+<td>7h</td>
+<td>✅ Mock exam ≥88% ✅ Final gap list created</td>
+<td>—</td>
+<td>—</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="117">Sat Jul 11</span></strong></td>
+<td><strong>Portfolio: GitHub Final Polish</strong> Review all repos.
+Add missing screenshots. Update any outdated README sections. Verify
+every link works. Ensure code is publicly visible</td>
+<td><strong>Resume Draft v1</strong> Write your resume: 1–2 pages max.
+Focus on: Azure data engineering projects (with metrics), technologies
+used, and business impact. No filler content</td>
+<td><strong>Resume: Keyword Alignment</strong> Compare your resume
+against 5 job descriptions. Ensure your keywords match. Recruiters use
+ATS keyword scanning</td>
+<td>6.5h</td>
+<td>✅ GitHub fully polished ✅ Resume v1 complete</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Resume v1 complete and
+keyword-aligned</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="118">Sun Jul 12</span></strong></td>
+<td><strong>Rest / Light Review</strong> Flashcards only. Maximum 1 hour
+total study. Sleep well — your brain needs consolidation time</td>
+<td>—</td>
+<td>—</td>
+<td>2–3h</td>
+<td>Light review only</td>
+<td>—</td>
+<td>—</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="week-18-phase-4-july-1319">📅 WEEK 18 | Phase 4 | July
+13–19</h2>
+<h3 id="weekly-focus-17">Weekly Focus</h3>
+<ul>
+<li>Final DP-203 exam preparation</li>
+<li>Mock exams targeting consistent 90%+ performance</li>
+<li>LinkedIn profile optimization</li>
+<li>Technical blog post published</li>
+<li>Interview preparation: 30 Q&amp;A document + mock recording</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="119">Mon Jul 13</span></strong></td>
+<td><strong>Final Weak Areas: Last Sprint</strong> One last focused dive
+on your 2–3 remaining weak areas. This is the last time you study new
+content before the exam</td>
+<td><strong>Practice Exam Set 8</strong> 60 questions. This should
+closely reflect your actual exam performance</td>
+<td><strong>Review &amp; Close Final Gaps</strong> Any wrong answers
+from exam 8 — those are your final study targets. Close every single
+gap</td>
+<td>7h</td>
+<td>✅ Final weak areas addressed ✅ Practice exam 8 ≥90%</td>
+<td>—</td>
+<td><strong>Checkpoint:</strong> Consistently scoring 90%+ across
+multiple exams — you’re ready</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="120">Tue Jul 14</span></strong></td>
+<td><strong>Full-Length Mock Exam #2</strong> 60 questions. 150-minute
+strict timer. Exact exam conditions. Treat this as the real thing</td>
+<td><strong>Mock Exam Review</strong> Understand every answer
+completely. For wrong answers: open MS Learn, read the exact section,
+write your own explanation</td>
+<td><strong>Positive Inventory</strong> Write down every topic you NOW
+know well. Read through your cheat sheets — focus on what you KNOW</td>
+<td>7h</td>
+<td>✅ Mock exam 2 ≥90% ✅ Every answer understood</td>
+<td>—</td>
+<td>—</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="121">Wed Jul 15</span></strong></td>
+<td><strong>LinkedIn: Full Optimization</strong> Update: headline
+(include “Azure Data Engineer”), about section (compelling 3-paragraph
+story), skills (add all Azure services), featured section (add both
+projects)</td>
+<td><strong>Blog Post: Publish</strong> Finalize and publish your
+technical blog post on Medium or Dev.to. Share the post on LinkedIn
+immediately after publishing</td>
+<td><strong>GitHub Profile README</strong> Create a professional GitHub
+profile README: who you are, your skills, featured projects,
+certifications, and how to contact you</td>
+<td>6.5h</td>
+<td>✅ LinkedIn fully optimized ✅ Technical blog post published ✅
+GitHub profile README live</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Technical blog post live and shared on
+LinkedIn</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="122">Thu Jul 16</span></strong></td>
+<td><strong>Interview Prep: 30 Technical Q&amp;As</strong> Research and
+write answers for 30 common Azure Data Engineer interview questions.
+Cover: ADF, Databricks, Synapse, streaming, security, performance,
+system design</td>
+<td><strong>Interview Prep: STAR Behavioral Stories</strong> Prepare 4
+STAR format answers based on your 2 portfolio projects: a challenge you
+faced, a technical decision you made, something you’re proud of, how you
+handled a failure</td>
+<td><strong>Mock Interview Recording</strong> Record yourself answering
+5 technical questions on video. Watch it back. Note: clarity, technical
+accuracy, confidence. Refine your answers</td>
+<td>7h</td>
+<td>✅ 30 technical Q&amp;As written ✅ 4 STAR stories prepared ✅ Mock
+video recorded and reviewed</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> Interview preparation document (30
+Q&amp;As + 4 STAR stories) committed to Notion/GitHub</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="123">Fri Jul 17</span></strong></td>
+<td><strong>Light Exam Review Day</strong> Review your cheat sheets and
+decision framework one-pager — nothing new. This is memory reinforcement
+only</td>
+<td><strong>Exam Logistics</strong> Confirm exam appointment. Test
+proctoring software. Prepare valid photo ID. Check your internet
+connection. Ensure a quiet exam room</td>
+<td><strong>Rest</strong> Go for a walk. Eat a nutritious meal. Call a
+friend or family member. You have done everything you can</td>
+<td>3h</td>
+<td>✅ Exam logistics confirmed ✅ Mind and body rested</td>
+<td>—</td>
+<td><strong>Exam in 4 days — you’ve prepared thoroughly</strong></td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="124">Sat Jul 18</span></strong></td>
+<td><strong>Quick Confidence Booster</strong> One 30-question quiz — not
+a full exam. Just a reminder of how much you know</td>
+<td><strong>Final Comparison Table Review</strong> Read through: ADF vs
+Synapse Pipelines, Databricks vs Synapse Spark, dedicated pool vs
+serverless, Event Hubs vs IoT Hub</td>
+<td><strong>Plan Phase 5</strong> Research 10 target companies. Build
+the start of your job tracking spreadsheet: Company</td>
+<td>Role</td>
+<td>JD Link</td>
+<td>Applied Date</td>
+<td>Status</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="125">Sun Jul 19</span></strong></td>
+<td><strong>Complete Rest Day</strong> 🧘 No studying. Good food. Early
+night. Your preparation is complete — let your brain consolidate it</td>
+<td>—</td>
+<td>—</td>
+<td>Rest</td>
+<td>—</td>
+<td>—</td>
+<td><strong>Exam week — sleep is your greatest advantage
+tonight</strong></td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="week-19-phase-4-july-2026-certification-week">📅 WEEK 19 | Phase
+4 | <span class="auto-date" data-fmt="MMMM D" data-offset="126">July 20</span>–<span class="auto-date" data-fmt="D" data-offset="132">26</span> ⭐ CERTIFICATION WEEK</h2>
+<h3 id="weekly-focus-18">Weekly Focus</h3>
+<ul>
+<li>Pass DP-203 exam on <span class="auto-date" data-fmt="MMMM D" data-offset="127">July 21</span></li>
+<li>Immediately announce certification and start applying</li>
+<li>Send first 15+ job applications by end of week</li>
+</ul>
+<hr/>
+<table>
+<colgroup>
+<col style="width: 3%"/>
+<col style="width: 15%"/>
+<col style="width: 16%"/>
+<col style="width: 16%"/>
+<col style="width: 6%"/>
+<col style="width: 14%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Time Block 1 (9:00–11:00)</th>
+<th>Time Block 2 (11:30–14:30)</th>
+<th>Time Block 3 (15:30–17:30)</th>
+<th>Total Hrs</th>
+<th>Tasks / Modules / Labs</th>
+<th>Resources / Links</th>
+<th>Deliverable / Checkpoint</th>
+<th class="col-done">Done</th></tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="126">Mon Jul 20</span></strong></td>
+<td><strong>Light Review Only</strong> Flashcards and your service
+comparison one-pager — maximum 1 hour total. Trust your preparation</td>
+<td><strong>Relax &amp; Prepare</strong> Physical exercise if possible.
+Nutritious meal. Don’t cram new material today</td>
+<td><strong>Final Logistics</strong> Re-confirm exam appointment. Test
+webcam. Prepare ID. Set up a quiet, well-lit exam room</td>
+<td>2–3h</td>
+<td>✅ Relaxed and completely prepared</td>
+<td>—</td>
+<td><strong>Exam tomorrow — light day, good sleep tonight
+😴</strong></td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="127">Tue Jul 21</span></strong></td>
+<td>⭐ <strong>DP-203 EXAM DAY</strong> 🎯 You’ve worked for 19 weeks
+for this moment. Read every question carefully. For scenario questions:
+eliminate wrong answers, then decide between remaining options</td>
+<td>Celebrate after — regardless of immediate result, you’ve built real
+skills and two real projects</td>
+<td>—</td>
+<td>—</td>
+<td><strong>DP-203 EXAM</strong></td>
+<td><a href="https://home.pearsonvue.com/microsoft" rel="noopener noreferrer" target="_blank">Pearson VUE</a></td>
+<td><strong>🎉 DP-203 CERTIFIED!</strong></td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="128">Wed Jul 22</span></strong></td>
+<td><strong>Celebrate &amp; Announce</strong> 🎉 Post on LinkedIn
+immediately: “Passed DP-203 Azure Data Engineer Associate! Here’s what
+the journey looked like…” Add certification badge to LinkedIn
+profile</td>
+<td><strong>Resume: Add DP-203</strong> Update resume with DP-203
+certification. Finalize resume v2 — this is the version you’ll send to
+employers</td>
+<td><strong>Build Job Tracking Sheet</strong> Create a spreadsheet:
+Company</td>
+<td>Role</td>
+<td>JD Link</td>
+<td>Applied Date</td>
+<td>Status</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="129">Thu Jul 23</span></strong></td>
+<td><strong>Resume Tailoring: First 3 Applications</strong> Tailor your
+resume for 3 specific job descriptions. Adjust keywords and bullet
+points to match each JD</td>
+<td><strong>Cover Letters: First 3</strong> Write personalized cover
+letters for your first 3 target companies. Use your blog post and
+project GitHub links</td>
+<td><strong>Apply: First 5 Jobs</strong> Submit your first 5
+applications using your tailored resume and cover letters</td>
+<td>7h</td>
+<td>✅ 5 applications submitted ✅ Resume tailored to 3 JDs</td>
+<td>—</td>
+<td><strong>Deliverable:</strong> 5 applications submitted — the job
+hunt is officially live! 🚀**</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="130">Fri Jul 24</span></strong></td>
+<td><strong>Apply to 5 More Jobs</strong> Continue applying. Mix
+LinkedIn Easy Apply and direct applications on company career sites</td>
+<td><strong>LinkedIn Networking</strong> Send personalized connection
+requests to 10 Azure Data Engineers working at target companies. Message
+3 with a specific technical question or genuine compliment</td>
+<td><strong>Interview Prep Refresh</strong> Re-read your 30 Q&amp;A
+document and STAR stories. Be ready for a call at any time</td>
+<td>7h</td>
+<td>✅ 10 total applications ✅ 10 LinkedIn connections sent ✅
+Interview prep fresh</td>
+<td>—</td>
+<td>—</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="even">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="131">Sat Jul 25</span></strong></td>
+<td><strong>Apply to 5 More Jobs</strong> Continue building your
+application pipeline</td>
+<td><strong>Portfolio: Final Verification</strong> Click every GitHub
+link, every architecture diagram, every LinkedIn post reference. Ensure
+everything loads correctly for a recruiter viewing on desktop and
+mobile</td>
+<td><strong>Prepare for Interviews</strong> Research the interview
+process at your top 3 target companies. Know their tech stack and data
+infrastructure if possible</td>
+<td>6h</td>
+<td>✅ 15 total applications submitted</td>
+<td>—</td>
+<td>—</td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+<tr class="odd">
+<td><strong><span class="auto-date" data-fmt="ddd MMM D" data-offset="132">Sun Jul 26</span></strong></td>
+<td><strong>Rest &amp; Reflect</strong> 🎉 Look back at <span class="auto-date" data-fmt="MMMM D" data-offset="0">March 16</span>. You
+had some IT background and a Google Data Analytics certificate. Today
+you have DP-900 + DP-203 certifications, 2 production-grade portfolio
+projects, a professional LinkedIn, a technical blog post, and 15
+applications live. This is a transformation</td>
+<td>—</td>
+<td>—</td>
+<td>Rest</td>
+<td>✅ Proud and ready</td>
+<td>—</td>
+<td><strong>🎉 Phase 4 COMPLETE — DP-203 Certified + Portfolio Live +
+Job Hunt Launched!</strong></td>
+<td class="col-done"><label class="done-label"><input class="day-done" type="checkbox"/></label></td></tr>
+</tbody>
+</table>
+<blockquote>
+<p>🎉 <strong>Phase 4 Milestone:</strong> DP-203 CERTIFIED and actively
+applying with a professional portfolio. Your GitHub shows two real-world
+projects, your LinkedIn is optimized, you’ve published a technical
+article, and you have 15+ applications in motion. You are a legitimate
+Azure Data Engineer candidate. Keep the momentum going every single
+day!</p>
+</blockquote>
+<hr/>
+<h1 id="phase-5-job-hunt-week-20-onwards">🟪 PHASE 5: Job Hunt (Week 20
+Onwards)</h1>
+<p><strong>Start Date:</strong> <span class="auto-date" data-fmt="MMMM D, YYYY" data-offset="133">July 27, 2026</span> |
+<strong>Duration:</strong> Until the offer is signed</p>
+<h2 id="daily-structure-phase-5">Daily Structure (Phase 5)</h2>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 35%"/>
+<col style="width: 30%"/>
+<col style="width: 35%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Block</th>
+<th>Time</th>
+<th>Focus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Morning (2h)</td>
+<td>9:00–11:00</td>
+<td>Apply to 5–10 new jobs. Tailor resume to each JD. Quality over
+speed</td>
+</tr>
+<tr class="even">
+<td>Midday (2–3h)</td>
+<td>11:30–14:30</td>
+<td>Interview prep + mock interviews. Study company-specific tech if you
+have an interview</td>
+</tr>
+<tr class="odd">
+<td>Afternoon (2h)</td>
+<td>15:30–17:30</td>
+<td>LinkedIn networking, community engagement, follow-ups on
+applications, 1 Azure blog post per day to stay current</td>
+</tr>
+</tbody>
+</table>
+<h2 id="weekly-job-hunt-template">Weekly Job Hunt Template</h2>
+<table>
+<colgroup>
+<col style="width: 26%"/>
+<col style="width: 73%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Primary Focus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Monday</strong></td>
+<td>Apply 5–10 jobs + check for interview invitations</td>
+</tr>
+<tr class="even">
+<td><strong>Tuesday</strong></td>
+<td>Technical mock interview (Azure concepts, SQL, PySpark)</td>
+</tr>
+<tr class="odd">
+<td><strong>Wednesday</strong></td>
+<td>Apply 5–10 jobs + LinkedIn networking + content creation</td>
+</tr>
+<tr class="even">
+<td><strong>Thursday</strong></td>
+<td>System design practice (design a pipeline for a given scenario in 45
+minutes)</td>
+</tr>
+<tr class="odd">
+<td><strong>Friday</strong></td>
+<td>Apply remaining + review the week + refine resume/cover letter based
+on feedback</td>
+</tr>
+<tr class="even">
+<td><strong>Saturday</strong></td>
+<td>Community: Reddit r/dataengineering, Discord servers, LinkedIn
+groups. Study any skill gap uncovered in interviews</td>
+</tr>
+<tr class="odd">
+<td><strong>Sunday</strong></td>
+<td>Rest + plan next week</td>
+</tr>
+</tbody>
+</table>
+<h2 id="interview-preparation-checklist">Interview Preparation
+Checklist</h2>
+<ul class="task-list">
+<li><label><input type="checkbox"/>ADF: incremental load design,
+parameterization, monitoring, error handling</label></li>
+<li><label><input type="checkbox"/>Databricks/PySpark: transformation
+operations, optimization techniques, Delta Lake MERGE and time
+travel</label></li>
+<li><label><input type="checkbox"/>Synapse: dedicated vs serverless
+decision, distribution types, loading patterns, query
+performance</label></li>
+<li><label><input type="checkbox"/>Streaming: Event Hubs vs Service Bus
+vs IoT Hub, windowing types, late-arriving data handling</label></li>
+<li><label><input type="checkbox"/>Security: managed identity vs
+service principal, RBAC scope, Key Vault integration, private
+endpoints</label></li>
+<li><label><input type="checkbox"/>SQL: window functions, CTEs,
+performance tuning, query plans</label></li>
+<li><label><input type="checkbox"/>System design: design a data
+warehouse for e-commerce, design an ingestion pipeline for
+100TB/day</label></li>
+<li><label><input type="checkbox"/>Behavioral (STAR): your 2 projects
+are your stories — know every technical detail, challenge, and
+decision</label></li>
+</ul>
+<h2 id="job-search-strategy">Job Search Strategy</h2>
+<ul>
+<li><strong>Job titles to search:</strong> “Azure Data Engineer”, “Data
+Engineer Azure”, “ETL Developer Azure”, “Cloud Data Engineer”,
+“Analytics Engineer”</li>
+<li><strong>Target companies:</strong> Consulting firms (Accenture,
+Capgemini, Cognizant), Azure partners, data-heavy enterprises (finance,
+retail, healthcare tech)</li>
+<li><strong>Platforms:</strong> LinkedIn, Indeed, company career sites,
+dice.com, glassdoor.com</li>
+<li><strong>Target:</strong> 5–10 applications per day → ~50 per week →
+1–3 interviews per week after month 1</li>
+<li><strong>Networking:</strong> Referrals convert 4–5x better than cold
+applications — prioritize LinkedIn outreach</li>
+</ul>
+<hr/>
+<h2 id="flexibility-note-if-you-fall-behind-heres-how-to-catch-up">⚡
+Flexibility Note — If You Fall Behind, Here’s How to Catch Up</h2>
+<p><strong>Fell behind by 1–2 days?</strong> → Use your Sunday buffer
+day to catch up. Prioritize hands-on labs over passive reading. If you
+must skip something, skip re-watching videos. Never skip the labs.</p>
+<p><strong>Fell behind by a full week?</strong> → Compress by combining
+daily review sessions: merge 2 lighter days into 1. Skip the optional
+Udemy videos and rely on free MS Learn modules for that week. Add
+Saturday as a full 7-hour study day for 2–3 weeks.</p>
+<p><strong>Phase 2 expanding beyond 8 weeks?</strong> → Phase 2 is the
+densest phase and may naturally take 9–10 weeks. That’s completely fine.
+Add 1–2 weeks to Phase 2 and trim 1 week from Phase 3 by doing security
+and CI/CD in 10 days instead of 2 weeks.</p>
+<p><strong>Azure credits running out?</strong> → Immediately pause or
+delete: Synapse dedicated SQL pool (most expensive), Databricks
+all-purpose clusters (switch to job clusters), and any idle VMs. Your
+free $200 credit + free tier services should cover 3–4 months with
+careful resource management.</p>
+<p><strong>Exam anxiety before DP-900 or DP-203?</strong> → Add 3–5
+extra targeted study days before scheduling your exam. It’s far better
+to delay by 1–2 weeks than to fail and pay to rebook. Your practice test
+score needs to be consistent ≥90% before booking.</p>
+<p><strong>Got a job interview before finishing the roadmap?</strong> →
+🎉 Pause the timetable and prepare hard for the interview for 1 week. An
+interview mid-journey is a win — the roadmap will be here when you’re
+done. Your existing projects are real and impressive enough to interview
+with at any point after Week 13.</p>
+<p><strong>Missed the 20-week target?</strong> → A 22–24 week journey
+with the same quality of work is exceptional. Hiring managers care about
+your skills, portfolio, and certification — not how quickly you learned
+them.</p>
+<p><strong>Getting rejections in Phase 5?</strong> → Rejection is data,
+not failure. Collect feedback where possible. After 20+ rejections
+without interviews, revisit your resume keywords. After interviews
+without offers, identify which questions stumped you and add them to
+your practice list. Adjust and keep applying.</p>
+<hr/>
+<p><em>You have everything you need. Every phase was designed to build
+on the last. One day, one block, one skill at a time. You’re building
+something real — and it will pay off. 💪</em></p>
+
+<script>
+/**
+ * timetable.js
+ * Azure Data Engineer - 20-Week Timetable
+ * -------------------------------------------------------------
+ * Features:
+ *   1. DATE UPDATER    - picks a new start date and rewrites every
+ *                        .auto-date span across the whole document.
+ *   2. DAY COMPLETION  - Done checkbox strikes through a row and
+ *                        persists state in localStorage.
+ *   3. TIME TRACKER    - per-row stopwatch injected into every
+ *                        schedule table. Start / Pause / Reset.
+ *                        Accumulated time persists in localStorage.
+ *                        Weekly and grand-total summaries update live.
+ * -------------------------------------------------------------
+ * Usage: <script src="timetable.js" defer><\/script>
+ */
+
+
+/* ============================================================
+   SECTION 1 -- DATE UPDATER
+   ============================================================ */
+(function () {
+
+  var MONTHS_FULL = [
+    'January','February','March','April','May','June',
+    'July','August','September','October','November','December'
+  ];
+  var MONTHS_SHORT = [
+    'Jan','Feb','Mar','Apr','May','Jun',
+    'Jul','Aug','Sep','Oct','Nov','Dec'
+  ];
+  var DAYS_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+  var DEFAULT_START = '2026-03-16';
+
+  function parseLocal(str) {
+    var p = str.split('-');
+    return new Date(+p[0], +p[1] - 1, +p[2]);
+  }
+
+  function addDays(base, n) {
+    var d = new Date(base.getTime());
+    d.setDate(d.getDate() + n);
+    return d;
+  }
+
+  function formatDate(d, fmt) {
+    var M   = MONTHS_FULL[d.getMonth()];
+    var m   = MONTHS_SHORT[d.getMonth()];
+    var D   = d.getDate();
+    var Y   = d.getFullYear();
+    var ddd = DAYS_SHORT[d.getDay()];
+    switch (fmt) {
+      case 'ddd MMM D':    return ddd + ' ' + m + ' ' + D;
+      case 'MMM D':        return m + ' ' + D;
+      case 'MMMM D':       return M + ' ' + D;
+      case 'MMMM D, YYYY': return M + ' ' + D + ', ' + Y;
+      case 'D':            return String(D);
+      default:             return M + ' ' + D;
+    }
+  }
+
+  function updateDates(startDateStr) {
+    var start = parseLocal(startDateStr);
+    document.querySelectorAll('.auto-date').forEach(function (span) {
+      var offset = parseInt(span.getAttribute('data-offset'), 10);
+      var fmt    = span.getAttribute('data-fmt');
+      span.textContent = formatDate(addDays(start, offset), fmt);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var input = document.getElementById('start-date-input');
+    if (!input) return;
+    var saved = localStorage.getItem('timetable_start_date');
+    if (saved && saved !== DEFAULT_START) {
+      input.value = saved;
+      updateDates(saved);
+    }
+    input.addEventListener('change', function () {
+      if (!this.value) return;
+      updateDates(this.value);
+      localStorage.setItem('timetable_start_date', this.value);
+    });
+  });
+
+})();
+
+
+/* ============================================================
+   SECTION 2 -- DAY COMPLETION (checkbox rows)
+   ============================================================ */
+(function () {
+
+  var STORAGE_KEY = 'timetable_completed_rows';
+
+  function loadCompleted() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? new Set(JSON.parse(raw)) : new Set();
+    } catch (e) { return new Set(); }
+  }
+
+  function saveCompleted(set) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(set)));
+    } catch (e) {}
+  }
+
+  function rowKey(tr) {
+    var cell = tr.querySelector('td:first-child');
+    return cell ? cell.textContent.trim() : '';
+  }
+
+  function markRow(tr, done) {
+    tr.classList.toggle('day-complete', done);
+    var cb = tr.querySelector('input.day-done');
+    if (cb) cb.checked = done;
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var completed = loadCompleted();
+    document.querySelectorAll('tbody tr').forEach(function (tr) {
+      var key = rowKey(tr);
+      if (key && completed.has(key)) markRow(tr, true);
+    });
+    document.addEventListener('change', function (e) {
+      if (!e.target.matches('input.day-done')) return;
+      var tr   = e.target.closest('tr');
+      var done = e.target.checked;
+      var key  = rowKey(tr);
+      markRow(tr, done);
+
+      // Auto-pause the running timer for this row when marked Done
+      if (done && window.__timerState && key && window.__timerState[key]) {
+        var s = window.__timerState[key];
+        if (s.startedAt !== null) {
+          s.elapsedMs += Date.now() - s.startedAt;
+          s.startedAt = null;
+          if (s.intervalId) { clearInterval(s.intervalId); s.intervalId = null; }
+          var playBtn = tr.querySelector('.timer-play');
+          if (playBtn) { playBtn.innerHTML = '▶'; playBtn.classList.remove('running'); }
+          tr.classList.remove('timer-running');
+          var disp = tr.querySelector('.timer-display');
+          if (disp) disp.textContent = window.__fmtMs(s.elapsedMs);
+          if (window.__saveTimeLog) window.__saveTimeLog();
+          if (window.__updateWeekTotal) window.__updateWeekTotal(tr.closest('table'));
+          if (window.__updateGrandTotal) window.__updateGrandTotal();
+        }
+      }
+
+      if (key) {
+        done ? completed.add(key) : completed.delete(key);
+        saveCompleted(completed);
+      }
+    });
+  });
+
+})();
+
+
+/* ============================================================
+   SECTION 3 -- TIME TRACKER
+   ============================================================ */
+(function () {
+
+  var TIME_KEY = 'timetable_time_log';   // { rowKey: elapsedMs }
+
+  /* In-memory state: rowKey -> { elapsedMs, startedAt, intervalId } */
+  var state = {};
+
+  /* -- Persistence ----------------------------------------- */
+
+  function loadTimeLog() {
+    try {
+      var raw = localStorage.getItem(TIME_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) { return {}; }
+  }
+
+  function saveTimeLog() {
+    var log = {};
+    Object.keys(state).forEach(function (k) { log[k] = currentElapsed(k); });
+    try { localStorage.setItem(TIME_KEY, JSON.stringify(log)); } catch (e) {}
+  }
+
+  /* -- Helpers --------------------------------------------- */
+
+  function currentElapsed(key) {
+    var s = state[key];
+    if (!s) return 0;
+    return s.startedAt !== null
+      ? s.elapsedMs + (Date.now() - s.startedAt)
+      : s.elapsedMs;
+  }
+
+  function fmtMs(ms) {
+    var totalSec = Math.floor(ms / 1000);
+    var h = Math.floor(totalSec / 3600);
+    var m = Math.floor((totalSec % 3600) / 60);
+    var s = totalSec % 60;
+    return (h ? pad(h) + ':' : '') + pad(m) + ':' + pad(s);
+  }
+
+  function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+  function rowKey(tr) {
+    var cell = tr.querySelector('td:first-child');
+    return cell ? cell.textContent.trim() : '';
+  }
+
+  /* -- Build timer cell ------------------------------------ */
+
+  function buildTimerCell(key) {
+    var td = document.createElement('td');
+    td.className = 'col-timer';
+    td.setAttribute('data-row-key', key);
+
+    var widget = document.createElement('div');
+    widget.className = 'timer-widget';
+
+    var btnPlay = document.createElement('button');
+    btnPlay.className = 'timer-btn timer-play';
+    btnPlay.title = 'Start / Pause timer';
+    btnPlay.innerHTML = '▶';          /* ▶ */
+
+    var display = document.createElement('span');
+    display.className = 'timer-display';
+    display.textContent = '00:00';
+
+    var btnReset = document.createElement('button');
+    btnReset.className = 'timer-btn timer-reset';
+    btnReset.title = 'Reset timer';
+    btnReset.innerHTML = '↻';         /* ↻ */
+
+    widget.appendChild(btnPlay);
+    widget.appendChild(display);
+    widget.appendChild(btnReset);
+    td.appendChild(widget);
+
+    /* Restore saved time */
+    var s = state[key];
+    if (s && s.elapsedMs > 0) display.textContent = fmtMs(s.elapsedMs);
+
+    /* --- Play / Pause --- */
+    btnPlay.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var s = state[key];
+      if (s.startedAt !== null) {
+        /* Pause */
+        s.elapsedMs += Date.now() - s.startedAt;
+        s.startedAt = null;
+        clearInterval(s.intervalId);
+        s.intervalId = null;
+        btnPlay.innerHTML = '▶';
+        btnPlay.classList.remove('running');
+        td.closest('tr').classList.remove('timer-running');
+      } else {
+        /* Start */
+        s.startedAt = Date.now();
+        btnPlay.innerHTML = '⏸'; /* ⏸ */
+        btnPlay.classList.add('running');
+        td.closest('tr').classList.add('timer-running');
+        s.intervalId = setInterval(function () {
+          display.textContent = fmtMs(currentElapsed(key));
+          updateWeekTotal(td.closest('table'));
+          updateGrandTotal();
+          saveTimeLog();
+        }, 1000);
+      }
+    });
+
+    /* --- Reset --- */
+    btnReset.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var s = state[key];
+      if (s.intervalId) { clearInterval(s.intervalId); s.intervalId = null; }
+      s.elapsedMs = 0;
+      s.startedAt = null;
+      display.textContent = '00:00';
+      btnPlay.innerHTML = '▶';
+      btnPlay.classList.remove('running');
+      td.closest('tr').classList.remove('timer-running');
+      updateWeekTotal(td.closest('table'));
+      updateGrandTotal();
+      saveTimeLog();
+    });
+
+    return td;
+  }
+
+  /* -- Weekly total footer row ----------------------------- */
+
+  function updateWeekTotal(table) {
+    if (!table) return;
+    var totalMs = 0;
+    table.querySelectorAll('tbody tr').forEach(function (tr) {
+      var k = rowKey(tr);
+      if (k) totalMs += currentElapsed(k);
+    });
+
+    var tfoot = table.querySelector('tfoot.timer-tfoot');
+    if (!tfoot) {
+      tfoot = document.createElement('tfoot');
+      tfoot.className = 'timer-tfoot';
+      var colCount = table.querySelectorAll('thead tr th').length || 10;
+      var tr  = document.createElement('tr');
+      var tdL = document.createElement('td');
+      tdL.colSpan = colCount - 1;
+      tdL.className = 'timer-total-label';
+      tdL.innerHTML = '⏲ Week time logged';
+      var tdV = document.createElement('td');
+      tdV.className = 'timer-total-value';
+      tdV.textContent = '00:00';
+      tr.appendChild(tdL);
+      tr.appendChild(tdV);
+      tfoot.appendChild(tr);
+      table.appendChild(tfoot);
+    }
+    tfoot.querySelector('.timer-total-value').textContent = fmtMs(totalMs);
+  }
+
+  /* -- Grand total panel (inserted once after meta-bar) ---- */
+
+  function getOrCreateGrandPanel() {
+    var panel = document.getElementById('timer-grand-total');
+    if (panel) return panel;
+
+    panel = document.createElement('div');
+    panel.id = 'timer-grand-total';
+    panel.innerHTML =
+      '<span class="gt-icon">⏲</span>' +
+      '<span class="gt-label">Total Study Time Logged</span>' +
+      '<span class="gt-value" id="gt-value">0:00:00</span>';
+
+    var metaBar = document.getElementById('meta-bar');
+    if (metaBar && metaBar.parentNode) {
+      metaBar.parentNode.insertBefore(panel, metaBar.nextSibling);
+    } else {
+      document.body.insertBefore(panel, document.body.firstChild);
+    }
+    return panel;
+  }
+
+  function updateGrandTotal() {
+    var panel = getOrCreateGrandPanel();
+    var totalMs = 0;
+    Object.keys(state).forEach(function (k) { totalMs += currentElapsed(k); });
+    var totalSec = Math.floor(totalMs / 1000);
+    var h = Math.floor(totalSec / 3600);
+    var m = Math.floor((totalSec % 3600) / 60);
+    var s = totalSec % 60;
+    panel.querySelector('#gt-value').textContent =
+      h + ':' + pad(m) + ':' + pad(s);
+  }
+
+  /* -- Inject timers into all schedule tables -------------- */
+
+  function injectTimers() {
+    var log = loadTimeLog();
+
+    document.querySelectorAll('table').forEach(function (table) {
+      /* Only schedule tables have a "Day" header */
+      var isSchedule = false;
+      table.querySelectorAll('thead th').forEach(function (th) {
+        if (th.textContent.trim() === 'Day') isSchedule = true;
+      });
+      if (!isSchedule) return;
+      if (table.querySelector('th.col-timer')) return; /* already injected */
+
+      /* Header cell */
+      var headerRow = table.querySelector('thead tr');
+      var th = document.createElement('th');
+      th.className = 'col-timer';
+      th.textContent = 'Time Spent';
+      headerRow.appendChild(th);
+
+      /* Timer cell per body row */
+      table.querySelectorAll('tbody tr').forEach(function (tr) {
+        var key = rowKey(tr);
+        if (!key) return;
+        state[key] = {
+          elapsedMs:  log[key] || 0,
+          startedAt:  null,
+          intervalId: null
+        };
+        tr.appendChild(buildTimerCell(key));
+      });
+
+      updateWeekTotal(table);
+    });
+
+    getOrCreateGrandPanel();
+    updateGrandTotal();
+  }
+
+  /* -- Expose internals so Section 2 (Done checkbox) can reach them -- */
+  window.__timerState       = state;
+  window.__fmtMs            = fmtMs;
+  window.__saveTimeLog      = saveTimeLog;
+  window.__updateWeekTotal  = updateWeekTotal;
+  window.__updateGrandTotal = updateGrandTotal;
+
+  /* -- Freeze & save all timers on unload ------------------ */
+  window.addEventListener('beforeunload', function () {
+    Object.keys(state).forEach(function (key) {
+      var s = state[key];
+      if (s.startedAt !== null) {
+        s.elapsedMs += Date.now() - s.startedAt;
+        s.startedAt = null;
+        if (s.intervalId) { clearInterval(s.intervalId); s.intervalId = null; }
+      }
+    });
+    saveTimeLog();
+  });
+
+  document.addEventListener('DOMContentLoaded', injectTimers);
+
+})();
+
+</script>
+</body>
+</html>

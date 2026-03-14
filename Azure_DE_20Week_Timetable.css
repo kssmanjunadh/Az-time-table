@@ -1,0 +1,786 @@
+/* ============================================================
+   Azure Data Engineer — 20-Week Timetable
+   Stylesheet: Azure-themed, professional, fully responsive
+   ============================================================ */
+
+/* ── Google Fonts ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── Design Tokens ────────────────────────────────────────── */
+:root {
+  /* Azure brand palette */
+  --azure-blue:        #0078d4;
+  --azure-blue-dark:   #005a9e;
+  --azure-blue-light:  #50e6ff;
+  --azure-teal:        #00b7c3;
+  --azure-indigo:      #4f52b2;
+  --azure-purple:      #8764b8;
+
+  /* Phase accent colors */
+  --phase-0:  #0078d4;   /* blue  */
+  --phase-1:  #00b7c3;   /* teal  */
+  --phase-2:  #107c10;   /* green */
+  --phase-3:  #ca5010;   /* orange*/
+  --phase-4:  #8764b8;   /* purple*/
+  --phase-5:  #e3008c;   /* pink  */
+
+  /* Neutrals */
+  --bg:           #f3f6fb;
+  --surface:      #ffffff;
+  --surface-alt:  #f8fafd;
+  --border:       #dde3ed;
+  --border-light: #eef1f7;
+
+  /* Text */
+  --text-primary:   #111827;
+  --text-secondary: #4b5563;
+  --text-muted:     #6b7280;
+  --text-on-dark:   #ffffff;
+
+  /* Table stripes */
+  --row-odd:  #ffffff;
+  --row-even: #f0f5fb;
+  --row-hover:#e3edf9;
+
+  /* Typography */
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  /* Spacing & Radius */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  16px;
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md:  0 4px 12px rgba(0,120,212,.12), 0 2px 6px rgba(0,0,0,.06);
+  --shadow-lg:  0 8px 28px rgba(0,120,212,.14), 0 4px 12px rgba(0,0,0,.08);
+}
+
+/* ── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 15px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.7;
+  padding: 2.5rem 1.5rem 5rem;
+}
+
+/* ── Page Wrapper ─────────────────────────────────────────── */
+body > * {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Top-level H1 (Page Title) ────────────────────────────── */
+h1:first-of-type {
+  background: linear-gradient(135deg, var(--azure-blue-dark) 0%, var(--azure-blue) 50%, var(--azure-teal) 100%);
+  color: var(--text-on-dark);
+  padding: 2.5rem 2.5rem 2rem;
+  border-radius: var(--radius-lg);
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+h1:first-of-type::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 240px; height: 240px;
+  background: rgba(255,255,255,.07);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ── Phase H1 Banners ─────────────────────────────────────── */
+h1:not(:first-of-type) {
+  padding: 1.1rem 1.8rem;
+  border-radius: var(--radius-md);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 3rem 0 1.25rem;
+  color: var(--text-on-dark);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Color each phase banner by its emoji/text prefix */
+h1:not(:first-of-type)[id*="phase-0"] { background: linear-gradient(135deg, #005a9e, var(--phase-0)); }
+h1:not(:first-of-type)[id*="phase-1"] { background: linear-gradient(135deg, #007b82, var(--phase-1)); }
+h1:not(:first-of-type)[id*="phase-2"] { background: linear-gradient(135deg, #085108, var(--phase-2)); }
+h1:not(:first-of-type)[id*="phase-3"] { background: linear-gradient(135deg, #8c3806, var(--phase-3)); }
+h1:not(:first-of-type)[id*="phase-4"] { background: linear-gradient(135deg, #5c3d82, var(--phase-4)); }
+h1:not(:first-of-type)[id*="phase-5"] { background: linear-gradient(135deg, #9b0063, var(--phase-5)); }
+
+/* Fallback for any phase H1 not matched above */
+h1:not(:first-of-type):not([id*="phase-0"]):not([id*="phase-1"]):not([id*="phase-2"]):not([id*="phase-3"]):not([id*="phase-4"]):not([id*="phase-5"]) {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+/* ── H2 (Section Headings / Week Headers) ─────────────────── */
+h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--azure-blue-dark);
+  padding: 0.6rem 1.2rem;
+  border-left: 4px solid var(--azure-blue);
+  background: linear-gradient(to right, rgba(0,120,212,.07), transparent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin: 2.5rem 0 1rem;
+  letter-spacing: -0.01em;
+}
+
+/* ── H3 (Sub-headings) ────────────────────────────────────── */
+h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 1.5rem 0 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.8rem;
+}
+
+/* ── General Paragraphs ───────────────────────────────────── */
+p {
+  color: var(--text-secondary);
+  margin-bottom: 0.9rem;
+  font-size: 0.92rem;
+}
+
+strong { color: var(--text-primary); font-weight: 600; }
+
+/* ── Horizontal Rules ─────────────────────────────────────── */
+hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, var(--azure-blue), var(--azure-teal), transparent);
+  border-radius: 2px;
+  margin: 2.5rem 0;
+  opacity: 0.4;
+}
+
+/* ── Unordered Lists ──────────────────────────────────────── */
+ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+ul li {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+  line-height: 1.6;
+}
+
+ul li::marker {
+  color: var(--azure-blue);
+}
+
+/* ── Task / Checklist (input[type=checkbox] lists) ────────── */
+ul.task-list {
+  list-style: none;
+  padding-left: 0.25rem;
+}
+
+ul.task-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+}
+
+ul.task-list li:hover {
+  background: var(--row-hover);
+}
+
+ul.task-list input[type="checkbox"] {
+  margin-top: 0.25rem;
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--azure-blue);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+/* ── Blockquotes ──────────────────────────────────────────── */
+blockquote {
+  background: linear-gradient(to right, rgba(0,120,212,.06), rgba(0,183,195,.04));
+  border-left: 4px solid var(--azure-teal);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1.1rem 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: var(--shadow-sm);
+}
+
+blockquote p {
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  font-style: italic;
+  margin: 0;
+}
+
+blockquote strong {
+  color: var(--azure-blue-dark);
+}
+
+/* ── Inline Code ──────────────────────────────────────────── */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  background: rgba(0,120,212,.1);
+  color: var(--azure-blue-dark);
+  padding: 0.15em 0.45em;
+  border-radius: 4px;
+  border: 1px solid rgba(0,120,212,.15);
+  white-space: nowrap;
+}
+
+/* ── Links ────────────────────────────────────────────────── */
+a {
+  color: var(--azure-blue);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(0,120,212,.3);
+  transition: color 0.15s, border-color 0.15s;
+}
+
+a:hover {
+  color: var(--azure-blue-dark);
+  border-bottom-color: var(--azure-blue-dark);
+}
+
+/* ── Table Wrapper (scroll on mobile) ────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.855rem;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2.25rem;
+  display: block;           /* enables horizontal scroll */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Force table to use full width when not overflowing */
+@media (min-width: 900px) {
+  table { display: table; }
+}
+
+/* ── Table Head ───────────────────────────────────────────── */
+thead {
+  background: linear-gradient(135deg, var(--azure-blue-dark) 0%, var(--azure-blue) 100%);
+}
+
+thead th {
+  color: var(--text-on-dark);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.85rem 0.9rem;
+  text-align: left;
+  white-space: nowrap;
+  border: none;
+}
+
+/* ── Table Body Rows ──────────────────────────────────────── */
+tbody tr.odd  { background: var(--row-odd); }
+tbody tr.even { background: var(--row-even); }
+
+tbody tr {
+  border-bottom: 1px solid var(--border-light);
+  transition: background 0.12s;
+}
+
+tbody tr:last-child { border-bottom: none; }
+
+tbody tr:hover {
+  background: var(--row-hover) !important;
+}
+
+/* ── Table Cells ──────────────────────────────────────────── */
+td {
+  padding: 0.75rem 0.9rem;
+  vertical-align: top;
+  color: var(--text-secondary);
+  font-size: 0.855rem;
+  line-height: 1.55;
+  border-right: 1px solid var(--border-light);
+}
+
+td:last-child { border-right: none; }
+
+/* Day column — bold + highlighted */
+td:first-child {
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  background: rgba(0,120,212,.04);
+}
+
+/* Total hours column */
+td:nth-child(5) {
+  text-align: center;
+  font-weight: 700;
+  color: var(--azure-blue);
+  white-space: nowrap;
+}
+
+/* Deliverable column */
+td:last-child {
+  font-style: normal;
+}
+
+/* Task checkmark cells (✅ column) */
+td:nth-child(6) {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* ── Overall Timeline Summary Table ──────────────────────── */
+/* First table on page gets special treatment */
+h2[id*="overall"] + table thead {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+/* ── Phase 5 Daily Structure Table (3-col) ───────────────── */
+table[style*="100%"] thead {
+  background: linear-gradient(135deg, #5c1063, var(--phase-5));
+}
+
+/* ── Links inside table cells ─────────────────────────────── */
+td a {
+  font-size: 0.82em;
+  white-space: nowrap;
+}
+
+/* ── Flexibility / Tips Paragraphs ───────────────────────── */
+h2[id*="flexibility"] + p,
+h2[id*="flexibility"] ~ p {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1.1rem;
+  margin-bottom: 0.6rem;
+  box-shadow: var(--shadow-sm);
+  font-size: 0.88rem;
+}
+
+/* ── Footer motivational italic ──────────────────────────── */
+p em {
+  display: block;
+  text-align: center;
+  color: var(--azure-blue-dark);
+  font-size: 0.95rem;
+  background: linear-gradient(to right, rgba(0,120,212,.05), rgba(0,183,195,.05));
+  border-radius: var(--radius-md);
+  padding: 1.2rem 1.5rem;
+  border: 1px solid rgba(0,120,212,.15);
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+/* ── Emoji in headings — no color shift ──────────────────── */
+h1, h2, h3 {
+  font-variant-emoji: text;
+}
+
+/* ── Scrollbar Styling ────────────────────────────────────── */
+::-webkit-scrollbar { width: 7px; height: 7px; }
+::-webkit-scrollbar-track { background: var(--border-light); border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: var(--azure-blue); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--azure-blue-dark); }
+
+/* ── Meta Info Bar (with inline date picker) ──────────────── */
+p#meta-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.meta-key {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--azure-blue);
+}
+
+.meta-val {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+/* Inline date input — sits naturally inside the meta value */
+#start-date-input {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--azure-blue-dark);
+  background: rgba(0, 120, 212, 0.06);
+  border: 1.5px solid rgba(0, 120, 212, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.55rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+#start-date-input:hover {
+  background: rgba(0, 120, 212, 0.1);
+  border-color: var(--azure-blue);
+}
+
+#start-date-input:focus {
+  border-color: var(--azure-blue);
+  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.15);
+}
+
+span.auto-date { display: inline; }
+
+@media (max-width: 600px) {
+  p#meta-bar { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 420px) {
+  p#meta-bar { grid-template-columns: 1fr; }
+}
+
+/* ── Done / Completion Checkbox Column ───────────────────── */
+th.col-done,
+td.col-done {
+  text-align: center;
+  white-space: nowrap;
+  width: 52px;
+  min-width: 52px;
+}
+
+th.col-done {
+  background: rgba(0, 0, 0, 0.18);   /* slightly darker within the blue header */
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+td.col-done {
+  background: transparent;
+  vertical-align: middle;
+  padding: 0;
+}
+
+/* The clickable label fills the whole cell for easy tapping */
+label.done-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 2.8rem;
+  cursor: pointer;
+  padding: 0.4rem;
+}
+
+/* The checkbox itself */
+input.day-done {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  flex-shrink: 0;
+}
+
+input.day-done:hover {
+  border-color: var(--azure-blue);
+  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.15);
+}
+
+input.day-done:checked {
+  background: var(--azure-blue);
+  border-color: var(--azure-blue);
+}
+
+/* Checkmark via pseudo-element */
+input.day-done:checked::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 4px;
+  width: 6px;
+  height: 10px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+/* Strike-through the whole row when checked — JS toggled class */
+tr.day-complete td {
+  opacity: 0.5;
+  text-decoration: line-through;
+  text-decoration-color: rgba(0, 120, 212, 0.4);
+}
+
+tr.day-complete td.col-done {
+  text-decoration: none;
+  opacity: 1;
+}
+
+/* ── Grand Total Timer Panel ──────────────────────────────── */
+#timer-grand-total {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, #052a17 0%, #0e5c31 100%);
+  border-radius: var(--radius-md);
+  padding: 0.8rem 1.4rem;
+  margin-bottom: 1.75rem;
+  box-shadow: var(--shadow-md);
+  color: #ffffff;
+}
+
+.gt-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.gt-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #88f0b0;
+  flex: 1;
+}
+
+.gt-value {
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  background: rgba(0,0,0,.25);
+  padding: 0.2rem 0.75rem;
+  border-radius: var(--radius-sm);
+  min-width: 6rem;
+  text-align: center;
+}
+
+/* ── Timer Column Header & Cell ───────────────────────────── */
+th.col-timer {
+  text-align: center;
+  white-space: nowrap;
+  width: 110px;
+  min-width: 110px;
+  background: rgba(0,0,0,.2);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+td.col-timer {
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.4rem 0.5rem;
+  width: 110px;
+  min-width: 110px;
+}
+
+/* ── Timer Widget ─────────────────────────────────────────── */
+.timer-widget {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+/* Display: HH:MM:SS */
+.timer-display {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.15rem 0.4rem;
+  min-width: 3.6rem;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+/* Shared button base */
+.timer-btn {
+  font-size: 0.72rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0.22rem 0.45rem;
+  line-height: 1;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  flex-shrink: 0;
+}
+
+.timer-btn:hover  { transform: scale(1.12); }
+.timer-btn:active { transform: scale(0.95); }
+
+/* Play button — blue idle state */
+.timer-play {
+  background: rgba(0, 120, 212, 0.12);
+  color: var(--azure-blue);
+  border: 1px solid rgba(0, 120, 212, 0.3);
+}
+
+.timer-play:hover {
+  background: rgba(0, 120, 212, 0.22);
+  box-shadow: 0 0 0 2px rgba(0,120,212,.2);
+}
+
+/* Play button — green running state */
+.timer-play.running {
+  background: rgba(16, 124, 16, 0.15);
+  color: #107c10;
+  border-color: rgba(16, 124, 16, 0.4);
+  animation: pulse-ring 1.6s infinite;
+}
+
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0   rgba(16,124,16,.35); }
+  60%  { box-shadow: 0 0 0 5px rgba(16,124,16,0);   }
+  100% { box-shadow: 0 0 0 0   rgba(16,124,16,0);   }
+}
+
+/* Reset button — neutral */
+.timer-reset {
+  background: rgba(107, 114, 128, 0.1);
+  color: var(--text-muted);
+  border: 1px solid rgba(107, 114, 128, 0.25);
+  font-size: 0.85rem;
+}
+
+.timer-reset:hover {
+  background: rgba(202, 80, 16, 0.12);
+  color: #ca5010;
+  border-color: rgba(202,80,16,.3);
+}
+
+/* ── Running row highlight ────────────────────────────────── */
+tr.timer-running {
+  background: rgba(16, 124, 16, 0.06) !important;
+}
+
+tr.timer-running td:first-child {
+  background: rgba(16, 124, 16, 0.08);
+  color: #085108;
+}
+
+tr.timer-running .timer-display {
+  color: #107c10;
+  border-color: rgba(16,124,16,.4);
+  background: rgba(16,124,16,.06);
+}
+
+/* ── Weekly Total Footer ──────────────────────────────────── */
+tfoot.timer-tfoot tr {
+  background: linear-gradient(to right, rgba(0,120,212,.07), rgba(0,183,195,.05));
+  border-top: 2px solid var(--border);
+}
+
+.timer-total-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--azure-blue-dark);
+  letter-spacing: 0.03em;
+  padding: 0.55rem 0.9rem;
+  text-align: right;
+}
+
+.timer-total-value {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--azure-blue);
+  text-align: center;
+  padding: 0.55rem 0.5rem;
+  background: rgba(0,120,212,.06);
+  white-space: nowrap;
+}
+
+/* ── Print Styles ─────────────────────────────────────────── */
+@media print {
+  body { background: white; padding: 0; }
+
+  h1:first-of-type,
+  h1:not(:first-of-type) { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  table { box-shadow: none; border: 1px solid #ccc; font-size: 0.75rem; }
+
+  thead { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  a { color: var(--azure-blue); border: none; }
+
+  hr { opacity: 0.2; }
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  body { padding: 1.25rem 0.9rem 4rem; }
+
+  h1:first-of-type { font-size: 1.3rem; padding: 1.5rem 1.25rem; }
+
+  h1:not(:first-of-type) { font-size: 1.1rem; padding: 0.8rem 1.1rem; margin: 2rem 0 0.9rem; }
+
+  h2 { font-size: 0.95rem; padding: 0.5rem 1rem; margin: 1.75rem 0 0.75rem; }
+
+  table { font-size: 0.78rem; margin-bottom: 1.5rem; }
+
+  thead th { padding: 0.65rem 0.7rem; font-size: 0.7rem; }
+
+  td { padding: 0.6rem 0.7rem; }
+}
+
+@media (max-width: 480px) {
+  body { padding: 1rem 0.6rem 3rem; }
+  h1:first-of-type { font-size: 1.1rem; padding: 1.1rem 1rem; }
+  code { white-space: normal; }
+}
